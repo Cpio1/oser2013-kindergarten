@@ -7,6 +7,35 @@ import { MotifShape } from './Motifs';
 
 const label = 'Иллюстрация: күн, бұлттар, төбешіктер, құлыншақ, балапан, гүл және өскін';
 
+function SunFace({ r }: { r: number }) {
+  return (
+    <g className="sun-face" stroke="#624524" strokeWidth={r * .045} strokeLinecap="round" fill="none">
+      <path d={`M${-r*.34} ${-r*.06}q${r*.07} ${-r*.12} ${r*.14} 0M${r*.2} ${-r*.06}q${r*.07} ${-r*.12} ${r*.14} 0`} />
+      <path d={`M${-r*.16} ${r*.19}q${r*.16} ${r*.16} ${r*.32} 0`} />
+      <g fill="#EC9971" stroke="none" opacity=".7">
+        <ellipse cx={-r*.43} cy={r*.15} rx={r*.12} ry={r*.07} />
+        <ellipse cx={r*.43} cy={r*.15} rx={r*.12} ry={r*.07} />
+      </g>
+    </g>
+  );
+}
+
+function Butterfly({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <g className="butterfly-flight">
+        <g className="butterfly-wings" fill="#E78867">
+          <ellipse cx="-7" cy="-4" rx="7" ry="10" transform="rotate(-28 -7 -4)" />
+          <ellipse cx="7" cy="-4" rx="7" ry="10" transform="rotate(28 7 -4)" />
+          <ellipse cx="-5" cy="7" rx="5" ry="6" fill="#F6C85F" />
+          <ellipse cx="5" cy="7" rx="5" ry="6" fill="#F6C85F" />
+        </g>
+        <path d="M0 -7V9m0-15-4-5m4 5 4-5" stroke="#6B4A32" strokeWidth="2" strokeLinecap="round" />
+      </g>
+    </g>
+  );
+}
+
 const Rays = ({ r }: { r: number }) => (
   <g className="spin-slow">
     {Array.from({ length: 10 }, (_, i) => (
@@ -47,6 +76,7 @@ export function HeroArtTall({ id, className = '' }: { id: string; className?: st
           <Rays r={46} />
           <circle r="46" fill="#F6C85F" />
           <circle r="34" fill="#F9D67F" />
+          <SunFace r={46} />
         </g>
         <g transform="translate(64 118) scale(1.6)">
           <g className="drift">
@@ -85,6 +115,7 @@ export function HeroArtTall({ id, className = '' }: { id: string; className?: st
             <MotifShape kind="chick" />
           </g>
         </g>
+        <Butterfly x={354} y={246} s={1.15} />
         <Daisy x={214} y={428} s={1.5} />
         <Daisy x={300} y={448} s={1.2} color="#FCE1D2" />
         <Daisy x={468} y={424} s={1.3} />
@@ -116,6 +147,7 @@ export function HeroArtWide({ id, className = '' }: { id: string; className?: st
           <Rays r={22} />
           <circle r="22" fill="#F6C85F" />
           <circle r="16" fill="#F9D67F" />
+          <SunFace r={22} />
         </g>
         <g transform="translate(20 46) scale(1.05)">
           <g className="drift">
@@ -149,6 +181,7 @@ export function HeroArtWide({ id, className = '' }: { id: string; className?: st
             <MotifShape kind="chick" />
           </g>
         </g>
+        <Butterfly x={242} y={104} s={.65} />
         <Daisy x={160} y={196} s={1.1} />
         <Daisy x={218} y={204} s={0.9} color="#FCE1D2" />
         <Daisy x={336} y={194} s={1} />

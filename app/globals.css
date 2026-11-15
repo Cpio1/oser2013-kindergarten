@@ -1139,7 +1139,7 @@
 }
 @keyframes rise {
   from {
-    opacity: 0;
+    opacity: 1;
     translate: 0 14px;
   }
 }
@@ -1156,8 +1156,8 @@
 }
 @keyframes reveal {
   from {
-    opacity: 0;
-    translate: 0 22px;
+    opacity: 1;
+    translate: 0 12px;
   }
   to {
     opacity: 1;
@@ -1264,4 +1264,103 @@
   .bob {
     animation: none !important;
   }
+}
+
+/* Тактильные бумажные формы: светлая палитра и спокойная иерархия. */
+:root {
+  --ease-settle: cubic-bezier(.22, .8, .28, 1.18);
+  --paper-shadow: 0 3px 0 rgb(38 59 49 / .045), 0 14px 30px -24px rgb(38 59 49 / .35);
+}
+.site-header { box-shadow: 0 5px 20px -18px #263b31; }
+.hero-chip { border: 1px solid #efce7e; box-shadow: 0 2px 0 #efdfb3; }
+.hero-title { max-width: 12em; }
+.hero-name .decor { filter: drop-shadow(0 2px 0 #e7c09a); }
+.hero-media, .m-hero-media { filter: drop-shadow(0 8px 0 rgb(66 122 91 / .08)) drop-shadow(0 15px 16px rgb(38 59 49 / .09)); }
+.hero-visual::before {
+  content: ''; position: absolute; inset: 12% 0 4%; z-index: -1;
+  border: 1px dashed #9dbbaf; border-radius: 48% 48% 36% 36%; rotate: 5deg;
+}
+.hero-visual { isolation: isolate; }
+.fact-tile, .group-card, .m-group, .meal-card, .m-meal, .docs-card {
+  border: 1px solid rgb(38 59 49 / .07);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / .65), var(--paper-shadow);
+}
+.tone-apricot { background: #fbd9c6; }
+.tone-sun { background: #fbe8af; }
+.tone-leaf { background: #deedcf; }
+.tone-sky { background: #d9ecf7; }
+.group-motif, .m-group-motif svg, .meal-blob svg, .m-meal-blob svg {
+  filter: drop-shadow(0 3px 1px rgb(38 59 49 / .1));
+}
+.group-motif { transition: rotate 240ms var(--ease-settle), scale 240ms var(--ease-settle); }
+.contact-card { box-shadow: inset 0 2px 0 rgb(255 255 255 / .12), 0 10px 0 #e2e9d6, 0 25px 40px -30px #263b31; }
+.contact-blob { width: 10rem; height: 9rem; right: -2rem; bottom: -3rem; }
+.eyebrow { letter-spacing: .025em; }
+.btn { transition-duration: 220ms; transition-timing-function: var(--ease-settle); }
+.btn-primary { box-shadow: 0 4px 0 #28543d, 0 10px 18px -12px #2f5e45; }
+.btn-primary:active { box-shadow: 0 1px 0 #28543d; }
+.btn:active { transform: translateY(2px) scale(1.025, .96); }
+.btn svg { transition: translate 220ms var(--ease-settle); }
+.btn:hover svg:last-child { translate: 3px 0; }
+.gallery-thumb img { transition-duration: 260ms; }
+.menu-button:active, .icon-btn:active { transform: scale(.97); }
+.nav-link:active, .mobile-menu-link:active { background: #deead6; }
+
+/* Одна короткая сценка: подготовка, прыжок по дуге, посадка, затухание.
+   Остальные персонажи остаются неподвижными, пока движется главный. */
+.float, .spin-slow, .drift, .sway, .nod, .bob { animation: none; }
+.nod { animation: foal-greeting 1400ms 650ms cubic-bezier(.4, 0, .2, 1) both; }
+.butterfly-flight { transform-box: fill-box; transform-origin: center; animation: butterfly-arc 1800ms 2100ms cubic-bezier(.4, 0, .2, 1) both; }
+.butterfly-wings { transform-box: fill-box; transform-origin: center; animation: wing-follow 1800ms 2100ms ease-in-out both; }
+@keyframes foal-greeting {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0); }
+  18% { transform: translate(0, 2px) scale(1.025, .96) rotate(-2deg); }
+  48% { transform: translate(1px, -3px) scale(.98, 1.025) rotate(4deg); }
+  72% { transform: translate(0, 1px) scale(1.015, .98) rotate(-1deg); }
+  88% { transform: translate(0, -1px) scale(1) rotate(.5deg); }
+}
+@keyframes butterfly-arc {
+  0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+  15% { transform: translate(-2px, 2px) rotate(-15deg); }
+  48% { transform: translate(10px, -14px) rotate(12deg); }
+  78% { transform: translate(3px, -3px) rotate(-12deg); }
+}
+@keyframes wing-follow {
+  0%, 100% { scale: 1; }
+  25%, 55% { scale: .65 1.05; }
+  40%, 75% { scale: 1.08 .98; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .group-card:hover { transform: translateY(-4px); }
+  .group-card:hover .group-motif { rotate: -6deg; scale: 1.06; }
+  .meal-card:hover { transform: translateY(-3px); }
+}
+@media (hover: none) {
+  .group-card:hover, .meal-card:hover, .btn:hover { transform: none; }
+  .btn:active { transform: translateY(2px) scale(1.015, .97); }
+}
+@media (min-width: 40em) {
+  .hero-title { font-size: clamp(2.25rem, 1rem + 3.5vw, 3.75rem); }
+  .hero-facts li { box-shadow: var(--paper-shadow); }
+  .group-card { padding: clamp(1.125rem, 2vw, 1.75rem); }
+  .group-motif { width: 4.25rem; height: 4.25rem; }
+}
+@media (max-width: 39.999em) {
+  .hero { padding-bottom: 1.5rem; }
+  .hero-title { font-size: clamp(1.75rem, 6.7vw, 2.5rem); }
+  .hero-chip { font-size: .8125rem; }
+  .m-hero-media { height: auto; max-height: 10.5rem; }
+  .m-hero-body { gap: .875rem; }
+  .m-hero-actions { gap: .25rem .75rem; }
+  .m-hero-cta { justify-content: center; }
+  .m-hero-facts li { box-shadow: 0 3px 0 rgb(66 122 91 / .06); font-size: .8125rem; }
+  .section-heading { margin-bottom: 1.25rem; }
+  .m-group { border-left: 4px solid rgb(66 122 91 / .2); }
+  .contact-card { padding: 1.5rem 1.125rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nod, .butterfly-flight, .butterfly-wings { animation: none !important; }
+  .reveal { opacity: 1; translate: none; }
+  .btn:hover, .btn:active, .group-card:hover, .meal-card:hover { transform: none; }
+  .btn:hover svg:last-child { translate: none; }
 }
