@@ -132,7 +132,7 @@ export const site = {
   media: {
     logo: { kind: 'image', src: '/images/optimized/logo.webp', width: 128, height: 128, alt: 'Осер 2013 балабақшасының эмблемасы' } as ImageMedia | null,
     /** main-page */
-    hero: { kind: 'image', src: '/images/optimized/main-page.webp', width: 720, height: 720, alt: 'Осер 2013 бөбекжай бақшасының эмблемасы', fit: 'contain' } as ImageMedia | null,
+    hero: { kind: 'image', src: '/images/optimized/main-page.png', width: 720, height: 720, alt: 'Осер 2013 бөбекжай бақшасының эмблемасы', fit: 'contain' } as ImageMedia | null,
     /** main-page2: определить реальный тип файла (изображение или видео) */
     about: null as ImageMedia | VideoMedia | null,
   },
