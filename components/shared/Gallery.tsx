@@ -1,10 +1,131 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { site } from '@/lib/site-data';
-export default function Gallery(){
- const [index,setIndex]=useState<number|null>(null);const dialog=useRef<HTMLDialogElement>(null);const opener=useRef<HTMLElement|null>(null);const start=useRef(0);const photos=site.gallery; const isOpen=index!==null;
- const move=(direction:number)=>setIndex(v=>v===null?null:(v+direction+photos.length)%photos.length);
- useEffect(()=>{if(!isOpen)return;opener.current=document.activeElement as HTMLElement;dialog.current?.showModal();const previous=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.body.style.overflow=previous;opener.current?.focus();};},[isOpen]);
- if(!photos.length)return null;
- return <section id="gallery" tabIndex={-1} className="section"><p className="eyebrow">Балабақша сәттері</p><h2>Галерея</h2><div className="gallery-grid">{photos.slice(0,6).map((photo,i)=><button className="gallery-item" key={photo.src} onClick={()=>setIndex(i)} aria-label={photo.alt+' — ашу'}><img src={photo.src} alt={photo.alt} style={{objectPosition:photo.position}} loading="lazy"/></button>)}</div><button className="button secondary" onClick={()=>setIndex(0)}>Барлық фотолар</button>{index!==null&&<dialog ref={dialog} className="lightbox" onCancel={()=>setIndex(null)} onKeyDown={e=>{if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);}}><div className="lightbox-top"><span>{index+1} / {photos.length}</span><button autoFocus onClick={()=>setIndex(null)} aria-label="Жабу">✕</button></div><img src={photos[index].src} alt={photos[index].alt} onTouchStart={e=>start.current=e.touches[0].clientX} onTouchEnd={e=>{const delta=e.changedTouches[0].clientX-start.current;if(Math.abs(delta)>40)move(delta<0?1:-1);}}/><div className="lightbox-bottom"><button onClick={()=>move(-1)} aria-label="Алдыңғы фото">←</button><p>{photos[index].alt}</p><button onClick={()=>move(1)} aria-label="Келесі фото">→</button></div></dialog>}</section>;
+import { Icon } from './Icons';
+import { SoftStar } from './Motifs';
+import { Section, SectionHeading } from './ui';
+
+/** Сколько превью видно сразу (совпадает с CSS .gallery-grid) */
+const VISIBLE = { mobile: 4, desktop: 6 };
+
+/**
+ * Галерея — общий компонент: одна разметка, число превью и сетка меняются CSS,
+ * поэтому фотографии не загружаются дважды. Раздел появляется только при наличии фото.
+ */
+export default function Gallery() {
+  const photos = site.gallery;
+  const [index, setIndex] = useState<number | null>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const opener = useRef<HTMLElement | null>(null);
+  const touchX = useRef<number | null>(null);
+  const isOpen = index !== null;
+  const count = photos.length;
+
+  const open = (i: number) => {
+    opener.current = document.activeElement as HTMLElement | null;
+    setIndex(i);
+  };
+  const close = useCallback(() => dialog.current?.close(), []);
+  const move = useCallback((step: number) => setIndex((v) => (v === null ? v : (v + step + count) % count)), [count]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const d = dialog.current;
+    if (d && !d.open) d.showModal();
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = 'hidden';
+    return () => {
+      root.style.overflow = previous;
+    };
+  }, [isOpen]);
+
+  if (!count) return null;
+  const current = index !== null ? photos[index] : null;
+
+  return (
+    <Section id="gallery" className="section-pad">
+      <div className="container-x">
+        <SectionHeading id="gallery" eyebrow="Балабақша сәттері" title="Галерея" decor={<SoftStar className="decor decor-xs" />} />
+        <ul className="gallery-grid">
+          {photos.map((photo, i) => (
+            <li key={photo.src} className="gallery-item">
+              <button type="button" className="gallery-thumb" onClick={() => open(i)}>
+                <span className="sr-only">Үлкейту: </span>
+                <img
+                  src={photo.src}
+                  width={photo.width}
+                  height={photo.height}
+                  alt={photo.alt}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition: photo.position ?? '50% 50%' }}
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+        {count > VISIBLE.mobile && (
+          <div className={`mt-5 ${count > VISIBLE.desktop ? '' : 'sm:hidden'}`}>
+            <button type="button" className="btn btn-secondary" onClick={() => open(0)}>
+              <Icon name="images" className="size-5" />
+              <span>Барлық фотолар ({count})</span>
+            </button>
+          </div>
+        )}
+      </div>
+
+      <dialog
+        ref={dialog}
+        className="lightbox"
+        aria-label="Фотосуреттерді қарау"
+        onClose={() => {
+          setIndex(null);
+          opener.current?.focus();
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) close();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowRight') move(1);
+          if (e.key === 'ArrowLeft') move(-1);
+        }}
+      >
+        {current && (
+          <div className="lightbox-inner">
+            <div className="lightbox-bar">
+              <p className="font-bold" aria-live="polite">
+                {index! + 1} / {count}
+              </p>
+              <button type="button" className="icon-btn" onClick={close} aria-label="Жабу">
+                <Icon name="close" />
+              </button>
+            </div>
+            <div
+              className="lightbox-stage"
+              onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+              onTouchEnd={(e) => {
+                if (touchX.current === null) return;
+                const dx = e.changedTouches[0].clientX - touchX.current;
+                touchX.current = null;
+                if (Math.abs(dx) > 40) move(dx < 0 ? 1 : -1);
+              }}
+            >
+              <img key={current.src} src={current.src} width={current.width} height={current.height} alt={current.alt} />
+            </div>
+            <div className="lightbox-bar">
+              <button type="button" className="icon-btn" onClick={() => move(-1)} aria-label="Алдыңғы фото" disabled={count < 2}>
+                <Icon name="chevron-left" />
+              </button>
+              <p className="lightbox-caption">{current.alt}</p>
+              <button type="button" className="icon-btn" onClick={() => move(1)} aria-label="Келесі фото" disabled={count < 2}>
+                <Icon name="chevron-right" />
+              </button>
+            </div>
+          </div>
+        )}
+      </dialog>
+    </Section>
+  );
 }

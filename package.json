@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-media.mjs",
     "build": "next build --webpack",
     "start": "node scripts/serve.mjs",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:media": "node scripts/check-media.mjs"
   },
   "dependencies": {
     "next": "16.4.6",
