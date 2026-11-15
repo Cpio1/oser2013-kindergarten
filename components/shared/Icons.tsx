@@ -13,6 +13,7 @@ type IconName =
   | 'mail'
   | 'camera'
   | 'clock'
+  | 'folder'
   | 'document'
   | 'images';
 
@@ -62,6 +63,7 @@ const paths: Record<IconName, React.ReactNode> = {
       <path d="M12 7.5V12l3 2" />
     </>
   ),
+  folder: <path d="M3 7V5a2 2 0 0 1 2-2h5l3 3h6a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />,
   document: (
     <>
       <path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />

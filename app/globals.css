@@ -1395,3 +1395,12 @@
   .gallery-thumb { padding: .25rem; border-radius: 1rem; }
   .lightbox-caption { font-size: .8125rem; line-height: 1.35; }
 }
+
+.docs-heading { display: flex; align-items: flex-start; gap: .875rem; min-width: 0; }
+.docs-icon { display: grid; place-items: center; flex: 0 0 2.75rem; height: 2.75rem; border-radius: 1rem; background: #fffdf8; color: #2f5e45; }
+.docs-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem; }
+.docs-files { display: grid; gap: .75rem; margin-top: 1.25rem; }
+.docs-file { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1rem; padding-top: .75rem; border-top: 1px solid rgb(38 59 49 / .12); }
+.docs-file > span { flex: 1 1 12rem; min-width: 0; }
+.documents-section .docs-card { padding: 1.5rem 1.25rem; }
+@media (min-width: 40em) { .documents-section .docs-card { padding: 2rem; } }

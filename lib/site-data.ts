@@ -52,6 +52,20 @@ export type Group = {
   tone: Tone;
 };
 
+export type SiteDocument = { name: string; href: string };
+
+/** Only web links and public file paths can be opened as documents. */
+export function documentHref(value: string): string | null {
+  const href = value.trim();
+  if (/^\/(?!\/)[^\s]+$/.test(href)) return href;
+  try {
+    const url = new URL(href);
+    return ['https:', 'http:'].includes(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 export const site = {
   name: 'Осер 2013',
   tagline: 'Қазақ тілді балабақша',
@@ -106,7 +120,7 @@ export const site = {
   links: {
     /** Предоставленное видео (Reel). Это не профиль аккаунта. */
     reel: 'https://www.instagram.com/reel/DZAXP9_MC3X/?mdxt=MWtndm1qdWhqcTVqeA==',
-    /** Действующая ссылка на документы — включает раздел «Құжаттар» */
+    /** Ссылка на папку документов; пустая строка оставляет сообщение о скором добавлении */
     documents: '',
     /** Точная карточка организации на карте (2ГИС / Google). Пока пусто — используется поиск по адресу */
     mapPlace: '',
@@ -124,6 +138,9 @@ export const site = {
     /** Например: 'Дүйсенбі–жұма, 08:00–19:00' */
     hours: '',
   },
+
+  /** Local files from public/documents: { name: 'Құжат атауы', href: '/documents/file.pdf' } */
+  documents: [] as SiteDocument[],
 
   legalName: '',
   /** Реальный домен с https:// — включает canonical и url в структурированных данных */
@@ -175,6 +192,6 @@ export const navigation: NavItem[] = [
   { id: 'groups', label: 'Топтар' },
   { id: 'meals', label: 'Тамақтану' },
   ...(site.gallery.length ? [{ id: 'gallery', label: 'Галерея' }] : []),
-  ...(site.links.documents ? [{ id: 'documents', label: 'Құжаттар' }] : []),
+  { id: 'documents', label: 'Құжаттар' },
   { id: 'contact', label: 'Байланыс' },
 ];

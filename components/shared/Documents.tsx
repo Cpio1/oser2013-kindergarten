@@ -1,24 +1,45 @@
-import { site } from '@/lib/site-data';
-import { Petal } from './Motifs';
-import { ButtonLink, Section, SectionHeading } from './ui';
+import { documentHref, site } from '@/lib/site-data';
+import { Icon } from './Icons';
+import { ButtonLink, Section } from './ui';
 
-/** Раздел появляется только после добавления действующей ссылки в site-data */
 export function Documents() {
-  if (!site.links.documents) return null;
+  const folder = documentHref(site.links.documents);
+  const files = site.documents.flatMap((file) => {
+    const href = documentHref(file.href);
+    return href ? [{ ...file, href }] : [];
+  });
   return (
-    <Section id="documents" className="section-pad">
+    <Section id="documents" className="section-pad documents-section">
       <div className="container-x">
         <div className="docs-card reveal">
-          <SectionHeading
-            id="documents"
-            eyebrow="Ақпарат"
-            title="Құжаттар"
-            lead="Балабақша құжаттарымен танысыңыз"
-            decor={<Petal className="decor decor-xs" />}
-          />
-          <ButtonLink href={site.links.documents} icon="document" external className="mt-5 w-full sm:w-auto">
-            Құжаттарды ашу
-          </ButtonLink>
+          <div className="docs-summary">
+            <div className="docs-heading">
+              <span className="docs-icon"><Icon name="folder" className="size-6" /></span>
+              <div>
+                <h2 id="documents-title" className="section-title">Құжаттар</h2>
+                <p className="mt-2 text-muted">
+                  {folder || files.length ? 'Балабақша құжаттарымен танысыңыз' : 'Құжаттар жақында қосылады'}
+                </p>
+              </div>
+            </div>
+            {folder && (
+              <ButtonLink href={folder} icon="folder" external className="w-full sm:w-auto">
+                Құжаттарды ашу
+              </ButtonLink>
+            )}
+          </div>
+          {files.length > 0 && (
+            <ul className="docs-files" aria-label="Құжаттар тізімі">
+              {files.map((file) => (
+                <li key={file.href} className="docs-file">
+                  <span className="font-bold">{file.name}</span>
+                  <ButtonLink href={file.href} variant="secondary" icon="document" external>
+                    <span>Ашу<span className="sr-only">: {file.name}</span></span>
+                  </ButtonLink>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </Section>
