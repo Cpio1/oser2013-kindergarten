@@ -1364,3 +1364,34 @@
   .btn:hover, .btn:active, .group-card:hover, .meal-card:hover { transform: none; }
   .btn:hover svg:last-child { translate: none; }
 }
+
+/* Фотографии показываются целиком: в групповых снимках важен каждый ребёнок. */
+.gallery-thumb {
+  padding: .375rem;
+  background: #fffdf8;
+  border: 1px solid rgb(38 59 49 / .12);
+  box-shadow: var(--paper-shadow);
+}
+.gallery-thumb img { object-fit: contain; border-radius: .875rem; }
+.gallery-thumb:hover img { transform: none; }
+.gallery-thumb:hover { border-color: #427a5b; background: #f1f5e9; }
+.gallery-thumb { transition: background-color 220ms, border-color 220ms; }
+.gallery-thumb:active { background: #e4efdf; }
+.hero-media.hero-emblem {
+  width: min(100%, 25rem);
+  max-height: min(28rem, calc(100svh - var(--header-h) - 5rem));
+  border-radius: 1.5rem;
+}
+.m-hero-media.hero-emblem {
+  width: auto;
+  max-width: 100%;
+  height: clamp(8rem, 22svh, 11rem);
+  border-radius: 1rem;
+}
+.brand img { border-radius: .375rem; }
+.lightbox-stage img { min-width: 0; min-height: 0; }
+.lightbox-caption { min-width: 0; }
+@media (max-width: 39.999em) {
+  .gallery-thumb { padding: .25rem; border-radius: 1rem; }
+  .lightbox-caption { font-size: .8125rem; line-height: 1.35; }
+}

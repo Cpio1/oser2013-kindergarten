@@ -18,7 +18,7 @@ export default function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLElement | null>(null);
-  const touchX = useRef<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const isOpen = index !== null;
   const count = photos.length;
 
@@ -54,7 +54,7 @@ export default function Gallery() {
               <button type="button" className="gallery-thumb" onClick={() => open(i)}>
                 <span className="sr-only">Үлкейту: </span>
                 <img
-                  src={photo.src}
+                  src={photo.thumbnail ?? photo.src}
                   width={photo.width}
                   height={photo.height}
                   alt={photo.alt}
@@ -88,8 +88,10 @@ export default function Gallery() {
           if (e.target === e.currentTarget) close();
         }}
         onKeyDown={(e) => {
-          if (e.key === 'ArrowRight') move(1);
-          if (e.key === 'ArrowLeft') move(-1);
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            move(e.key === 'ArrowRight' ? 1 : -1);
+          }
         }}
       >
         {current && (
@@ -104,12 +106,17 @@ export default function Gallery() {
             </div>
             <div
               className="lightbox-stage"
-              onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+              onClick={(e) => { if (e.target === e.currentTarget) close(); }}
+              onTouchStart={(e) => {
+                touchStart.current = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+              }}
+              onTouchCancel={() => { touchStart.current = null; }}
               onTouchEnd={(e) => {
-                if (touchX.current === null) return;
-                const dx = e.changedTouches[0].clientX - touchX.current;
-                touchX.current = null;
-                if (Math.abs(dx) > 40) move(dx < 0 ? 1 : -1);
+                if (!touchStart.current) return;
+                const dx = e.changedTouches[0].clientX - touchStart.current.x;
+                const dy = e.changedTouches[0].clientY - touchStart.current.y;
+                touchStart.current = null;
+                if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.25) move(dx < 0 ? 1 : -1);
               }}
             >
               <img key={current.src} src={current.src} width={current.width} height={current.height} alt={current.alt} />

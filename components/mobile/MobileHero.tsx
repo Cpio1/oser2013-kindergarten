@@ -27,7 +27,7 @@ export function MobileHeroBody() {
             alt={hero.alt}
             fetchPriority="high"
             decoding="async"
-            className={`m-hero-media ${hero.transparent ? 'object-contain' : 'm-hero-photo'}`}
+            className={`m-hero-media ${hero.transparent || hero.fit === 'contain' ? 'hero-emblem object-contain' : 'm-hero-photo'}`}
           />
         ) : (
           <HeroArtWide id="mobile" className="m-hero-media" />

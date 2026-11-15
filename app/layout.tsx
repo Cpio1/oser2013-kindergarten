@@ -6,7 +6,8 @@ import { site } from '@/lib/site-data';
 const title = `${site.name} — Қарақыстақ ауылындағы балабақша`;
 const description =
   'Қарақыстақ ауылындағы «Осер 2013» қазақ тілді балабақшасы: төрт жас тобы, күніне үш мезгіл тамақтану. Мекенжайы: Жамбыл ауданы, Бердіғұлов көшесі, 19А.';
-const ogImage = site.media.hero?.src;
+// Relative social images need the confirmed production domain.
+const ogImage = site.domain ? site.media.hero?.src : undefined;
 
 export const metadata: Metadata = {
   title,

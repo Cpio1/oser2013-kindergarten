@@ -40,7 +40,7 @@ export function DesktopHeroVisual() {
           alt={hero.alt}
           fetchPriority="high"
           decoding="async"
-          className={`hero-media ${hero.transparent ? 'object-contain' : 'hero-photo'}`}
+          className={`hero-media ${hero.transparent || hero.fit === 'contain' ? 'hero-emblem object-contain' : 'hero-photo'}`}
         />
       ) : (
         <HeroArtTall id="desktop" className="hero-media" />

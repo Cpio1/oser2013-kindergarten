@@ -19,6 +19,7 @@ export type ImageMedia = {
   alt: string;
   /** Прозрачное PNG/SVG: показывать целиком через object-fit: contain */
   transparent?: boolean;
+  fit?: 'contain' | 'cover';
 };
 
 export type VideoMedia = {
@@ -32,6 +33,7 @@ export type VideoMedia = {
 };
 
 export type Photo = {
+  thumbnail?: string;
   src: string;
   width: number;
   height: number;
@@ -128,14 +130,39 @@ export const site = {
   domain: '',
 
   media: {
-    logo: null as ImageMedia | null,
+    logo: { kind: 'image', src: '/images/optimized/logo.webp', width: 128, height: 128, alt: 'Осер 2013 балабақшасының эмблемасы' } as ImageMedia | null,
     /** main-page */
-    hero: null as ImageMedia | null,
+    hero: { kind: 'image', src: '/images/optimized/main-page.webp', width: 720, height: 720, alt: 'Осер 2013 бөбекжай бақшасының эмблемасы', fit: 'contain' } as ImageMedia | null,
     /** main-page2: определить реальный тип файла (изображение или видео) */
     about: null as ImageMedia | VideoMedia | null,
   },
 
-  gallery: [] as Photo[],
+  gallery: [
+    { src: '/images/optimized/image1.webp', thumbnail: '/images/optimized/image1-thumb.webp', width: 1599, height: 899, alt: '8 Наурыз мерекесіндегі балалар мен тәрбиешілер', position: '50% 50%' },
+    { src: '/images/optimized/image2.webp', thumbnail: '/images/optimized/image2-thumb.webp', width: 1600, height: 1371, alt: 'Ұлттық киімдегі екі бала мерекелік дастарқан басында', position: '50% 50%' },
+    { src: '/images/optimized/image3.webp', thumbnail: '/images/optimized/image3-thumb.webp', width: 1083, height: 1600, alt: 'Мерекелік безендірілген бөлмедегі балалар мен тәрбиешілер', position: '50% 50%' },
+    { src: '/images/optimized/image4.webp', thumbnail: '/images/optimized/image4-thumb.webp', width: 1600, height: 1371, alt: 'Ауладағы ұлттық мерекеге жиналған балалар', position: '50% 50%' },
+    { src: '/images/optimized/image5.webp', thumbnail: '/images/optimized/image5-thumb.webp', width: 1600, height: 1371, alt: 'Аулада ұлттық киіммен өнер көрсетіп тұрған балалар', position: '50% 50%' },
+    { src: '/images/optimized/image6.webp', thumbnail: '/images/optimized/image6-thumb.webp', width: 1600, height: 1371, alt: 'Балабақша ауласындағы мерекелік би', position: '50% 50%' },
+    { src: '/images/optimized/image7.webp', thumbnail: '/images/optimized/image7-thumb.webp', width: 1083, height: 1600, alt: 'Бөлмедегі мерекелік қойылымға қатысқан балалар', position: '50% 50%' },
+    { src: '/images/optimized/image8.webp', thumbnail: '/images/optimized/image8-thumb.webp', width: 1083, height: 1600, alt: 'Сары киімдегі балалардың мерекелік қойылымы', position: '50% 50%' },
+    { src: '/images/optimized/image9.webp', thumbnail: '/images/optimized/image9-thumb.webp', width: 1280, height: 780, alt: 'Ұлттық киімдегі балалар мен тәрбиешілердің топтық суреті', position: '50% 50%' },
+    { src: '/images/optimized/image10.webp', thumbnail: '/images/optimized/image10-thumb.webp', width: 867, height: 1156, alt: 'Үстел басында тапсырма орындап отырған балалар', position: '50% 50%' },
+    { src: '/images/optimized/image11.webp', thumbnail: '/images/optimized/image11-thumb.webp', width: 1200, height: 1600, alt: 'Баспалдақтағы ұлттық киім киген балалар', position: '50% 50%' },
+    { src: '/images/optimized/image12.webp', thumbnail: '/images/optimized/image12-thumb.webp', width: 1600, height: 1200, alt: 'Мерекелік залдағы ұлттық киімдегі балалар', position: '50% 50%' },
+    { src: '/images/optimized/image13.webp', thumbnail: '/images/optimized/image13-thumb.webp', width: 1280, height: 806, alt: 'Аулада қатар тұрған қызыл баскиімді балалар', position: '50% 50%' },
+    { src: '/images/optimized/image14.webp', thumbnail: '/images/optimized/image14-thumb.webp', width: 1156, height: 520, alt: 'Мерекелік залдағы балалардың топтық суреті', position: '50% 50%' },
+    { src: '/images/optimized/image15.webp', thumbnail: '/images/optimized/image15-thumb.webp', width: 1156, height: 520, alt: 'Ұлттық киімдегі балалардың топтық суреті', position: '50% 50%' },
+    { src: '/images/optimized/image16.webp', thumbnail: '/images/optimized/image16-thumb.webp', width: 1156, height: 520, alt: 'Дастарқан басындағы ұлттық киім киген балалар', position: '50% 50%' },
+    { src: '/images/optimized/image17.webp', thumbnail: '/images/optimized/image17-thumb.webp', width: 1280, height: 1015, alt: 'Ауладағы балалардың топтық суреті', position: '50% 50%' },
+    { src: '/images/optimized/image18.webp', thumbnail: '/images/optimized/image18-thumb.webp', width: 1600, height: 1066, alt: 'Мерекелік дастарқан басындағы балалар мен ересектер', position: '50% 50%' },
+    { src: '/images/optimized/image19.webp', thumbnail: '/images/optimized/image19-thumb.webp', width: 1280, height: 960, alt: 'Сынып бөлмесіндегі мерекелік киім киген балалар', position: '50% 50%' },
+    { src: '/images/optimized/image20.webp', thumbnail: '/images/optimized/image20-thumb.webp', width: 1200, height: 1600, alt: 'Тақта алдында бірге тұрған балалар', position: '50% 50%' },
+    { src: '/images/optimized/image21.webp', thumbnail: '/images/optimized/image21-thumb.webp', width: 1600, height: 1200, alt: 'Балабақша ауласындағы балалар', position: '50% 50%' },
+    { src: '/images/optimized/image22.webp', thumbnail: '/images/optimized/image22-thumb.webp', width: 1600, height: 1200, alt: 'Ойын бөлмесінде шеңбер құрып отырған балалар', position: '50% 50%' },
+    { src: '/images/optimized/image23.webp', thumbnail: '/images/optimized/image23-thumb.webp', width: 1600, height: 1200, alt: 'Көк және ақ киімдегі балалардың биі', position: '50% 50%' },
+    { src: '/images/optimized/image24.webp', thumbnail: '/images/optimized/image24-thumb.webp', width: 1600, height: 721, alt: 'Залдағы балалар мен тәрбиешілердің топтық суреті', position: '50% 50%' },
+  ] as Photo[],
 
   /** Дополнительные занятия — только подтверждённые */
   activities: [] as string[],
