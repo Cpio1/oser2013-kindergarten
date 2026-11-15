@@ -1,0 +1,10 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { navigation, site } from '@/lib/site-data';
+export function Brand() { return <a className="brand" href="#home" aria-label="Осер 2013 — басты бет">{site.media.logo ? <img src={site.media.logo} alt="" width="42" height="42"/> : <span className="brand-flower" aria-hidden="true">✿</span>}<span>{site.name}<small>Қазақ тілді балабақша</small></span></a> }
+export default function Header() {
+ const [open,setOpen] = useState(false); const header = useRef<HTMLElement>(null); const toggle = useRef<HTMLButtonElement>(null);
+ useEffect(()=>{ const el=header.current!; const observer=new ResizeObserver(()=>document.documentElement.style.setProperty('--header-height',el.getBoundingClientRect().height+'px')); observer.observe(el); return ()=>observer.disconnect(); },[]);
+ useEffect(()=>{ if(!open)return; const close=(e:KeyboardEvent)=>{if(e.key==='Escape'){setOpen(false);toggle.current?.focus();} if(e.key==='Tab'){const items=header.current?.querySelectorAll<HTMLElement>('a,button'); if(!items)return;const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}}; document.addEventListener('keydown',close); return ()=>document.removeEventListener('keydown',close); },[open]);
+ return <header ref={header} className="site-header"><div className="header-inner"><Brand/><nav className="desktop-nav" aria-label="Негізгі мәзір">{navigation.map(n=><a key={n.id} href={'#'+n.id}>{n.label}</a>)}</nav><button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="mobile-menu" aria-label={open?'Мәзірді жабу':'Мәзірді ашу'} onClick={()=>setOpen(!open)}>{open?'✕':'☰'}</button></div>{open&&<nav id="mobile-menu" className="mobile-nav" aria-label="Мобильді мәзір">{navigation.map(n=><a key={n.id} href={'#'+n.id} onClick={()=>{setOpen(false);requestAnimationFrame(()=>{document.getElementById(n.id)?.focus({preventScroll:true});});}}>{n.label}<span aria-hidden="true">↗</span></a>)}</nav>}</header>;
+}

@@ -1,0 +1,10 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { site } from '@/lib/site-data';
+export default function Gallery(){
+ const [index,setIndex]=useState<number|null>(null);const dialog=useRef<HTMLDialogElement>(null);const opener=useRef<HTMLElement|null>(null);const start=useRef(0);const photos=site.gallery; const isOpen=index!==null;
+ const move=(direction:number)=>setIndex(v=>v===null?null:(v+direction+photos.length)%photos.length);
+ useEffect(()=>{if(!isOpen)return;opener.current=document.activeElement as HTMLElement;dialog.current?.showModal();const previous=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.body.style.overflow=previous;opener.current?.focus();};},[isOpen]);
+ if(!photos.length)return null;
+ return <section id="gallery" tabIndex={-1} className="section"><p className="eyebrow">Балабақша сәттері</p><h2>Галерея</h2><div className="gallery-grid">{photos.slice(0,6).map((photo,i)=><button className="gallery-item" key={photo.src} onClick={()=>setIndex(i)} aria-label={photo.alt+' — ашу'}><img src={photo.src} alt={photo.alt} style={{objectPosition:photo.position}} loading="lazy"/></button>)}</div><button className="button secondary" onClick={()=>setIndex(0)}>Барлық фотолар</button>{index!==null&&<dialog ref={dialog} className="lightbox" onCancel={()=>setIndex(null)} onKeyDown={e=>{if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1);}}><div className="lightbox-top"><span>{index+1} / {photos.length}</span><button autoFocus onClick={()=>setIndex(null)} aria-label="Жабу">✕</button></div><img src={photos[index].src} alt={photos[index].alt} onTouchStart={e=>start.current=e.touches[0].clientX} onTouchEnd={e=>{const delta=e.changedTouches[0].clientX-start.current;if(Math.abs(delta)>40)move(delta<0?1:-1);}}/><div className="lightbox-bottom"><button onClick={()=>move(-1)} aria-label="Алдыңғы фото">←</button><p>{photos[index].alt}</p><button onClick={()=>move(1)} aria-label="Келесі фото">→</button></div></dialog>}</section>;
+}
