@@ -1,12 +1,14 @@
 import { contactActions } from '@/lib/links';
 import { site } from '@/lib/site-data';
 import { Icon } from './Icons';
+import { HouseTrail } from './Scenery';
 import { ButtonLink } from './ui';
 
 export function ContactInfo() {
   const { hours } = site.contacts;
   return (
     <div className="contact-info">
+      <HouseTrail className="contact-info-house" />
       <p className="text-[1.125rem] font-black text-white">«{site.name}»</p>
       <p className="mt-0.5 text-white/80">{site.tagline}</p>
       <div className="mt-4 flex gap-3">

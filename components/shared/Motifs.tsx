@@ -161,34 +161,6 @@ export function FolderArt({ className = '' }: { className?: string }) {
   );
 }
 
-/** Домик с указателем — «Байланыс». Сетка 128 × 96. */
-export function HouseArt({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 128 96" fill="none" aria-hidden="true" focusable="false">
-      <ellipse cx="64" cy="90" rx="60" ry="6" fill="#427A5B" />
-      {/* указатель */}
-      <path d="M104 88V44" stroke="#E8D3B5" strokeWidth="4" strokeLinecap="round" />
-      <g className="sign-sway">
-        <path d="M92 46h22l6 6-6 6H92Z" fill={C.apricot} />
-        <path d="M97 52h13" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" opacity=".85" />
-      </g>
-      {/* дом */}
-      <path d="M18 52 50 26l32 26v36H18Z" fill="#FFF9EE" />
-      <path d="M12 54 50 22l38 32" stroke="#E77D5E" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="64" y="22" width="9" height="16" rx="2" fill="#E77D5E" />
-      <path d="M41 88V68a9 9 0 0 1 18 0v20Z" fill={C.leafMid} />
-      <circle cx="54.5" cy="77" r="1.6" fill={C.sun} />
-      <rect x="24" y="58" width="12" height="12" rx="3" fill="#BFE0F0" />
-      <rect x="64" y="58" width="12" height="12" rx="3" fill="#BFE0F0" />
-      <path d="M50 46a5 5 0 1 1 0-.1" fill={C.sun} />
-      {/* кусты */}
-      <circle cx="16" cy="84" r="7" fill={C.leafLight} />
-      <circle cx="25" cy="86" r="5" fill="#7FB070" />
-      <circle cx="84" cy="85" r="5.5" fill={C.leafLight} />
-    </svg>
-  );
-}
-
 /** Маленькие иллюстрации фактов «Біз туралы». Сетка 40 × 40. */
 export type FactArtKind = 'pin' | 'book' | 'blocks' | 'spoon';
 export function FactArt({ kind, className = 'size-7' }: { kind: FactArtKind; className?: string }) {

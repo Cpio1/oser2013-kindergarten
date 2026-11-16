@@ -13,8 +13,9 @@ import { Footer } from '@/components/shared/Footer';
 import Gallery from '@/components/shared/Gallery';
 import Header from '@/components/shared/Header';
 import { HeroHeading } from '@/components/shared/HeroHeading';
-import { Cloud, Flower, HouseArt, Petal, SoftStar, SunBadge } from '@/components/shared/Motifs';
+import { Cloud, Flower, Petal, SoftStar, SunBadge } from '@/components/shared/Motifs';
 import { DesktopOnly, MobileOnly } from '@/components/shared/Responsive';
+import { Scenery } from '@/components/shared/Scenery';
 import { Section, SectionHeading } from '@/components/shared/ui';
 import { site } from '@/lib/site-data';
 
@@ -67,6 +68,7 @@ export default function Home() {
 
         {/* Біз туралы */}
         <Section id="about" className="section-pad">
+          <Scenery kind="about" />
           <div className="container-x">
             <SectionHeading
               id="about"
@@ -85,6 +87,7 @@ export default function Home() {
 
         {/* Топтар */}
         <Section id="groups" className="section-pad groups-section">
+          <Scenery kind="groups" />
           <div className="container-x">
             <SectionHeading
               id="groups"
@@ -104,6 +107,7 @@ export default function Home() {
 
         {/* Тамақтану */}
         <Section id="meals" className="section-pad meals-band">
+          <Scenery kind="meals" />
           <div className="container-x meals-layout">
             <SectionHeading
               id="meals"
@@ -135,9 +139,6 @@ export default function Home() {
               <div className="relative">
                 <div className="contact-head">
                   <SectionHeading id="contact" eyebrow="Байланыс" title="Мекенжайымыз" tone="light" />
-                  <MobileOnly>
-                    <HouseArt className="contact-house-m" />
-                  </MobileOnly>
                 </div>
                 <DesktopOnly>
                   <DesktopContact />

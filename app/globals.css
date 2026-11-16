@@ -650,12 +650,12 @@
   justify-self: center;
   width: 100%;
   max-width: 36rem;
-  padding: 1.5rem 2rem 2rem 3rem;
+  padding: 1.5rem 2rem 4.25rem 3rem;
 }
 
 /* Сцена: арка с фото + эмблема-медальон + маленькие фигурки */
 .hero-scene {
-  --arch-w: min(100%, 27rem, calc((100svh - var(--header-h) - 8rem) * 8 / 7));
+  --arch-w: min(100%, 27rem, calc((100svh - var(--header-h) - 10rem) * 8 / 7));
   position: relative;
   isolation: isolate;
   width: var(--arch-w);
@@ -712,6 +712,8 @@
 .hero-leaf-a { right: -10%; bottom: 12%; }
 .hero-leaf-b { right: -5%; bottom: 3%; rotate: 40deg; }
 .hero-star { top: -7%; left: 22%; }
+/* тропинка со следами вдоль нижнего края фото */
+.hero-scene-decor > .hero-trail { top: calc(100% - 1.25rem); left: 18%; width: 96%; height: auto; }
 
 .hero-scene-solo { width: min(100%, 25rem); }
 .hero-solo-emblem { width: 100%; height: auto; max-height: min(28rem, calc(100svh - var(--header-h) - 5rem)); object-fit: contain; }
@@ -739,7 +741,7 @@
 .m-hero-visual {
   display: flex;
   justify-content: center;
-  padding: .875rem 1.75rem 1rem 2.5rem;
+  padding: .875rem 1.75rem 1.75rem 2.5rem;
 }
 .hero-scene-mobile {
   --arch-w: min(100%, calc(clamp(7.5rem, 100svh - var(--header-h) - 28rem, 11rem) * 8 / 7));
@@ -753,6 +755,7 @@
 .hero-scene-mobile .hero-cloud { top: 12%; left: -20%; }
 .hero-scene-mobile .hero-leaf-a { right: -14%; bottom: 10%; }
 .hero-scene-mobile .hero-leaf-b { right: -9%; bottom: 0; }
+.hero-scene-mobile .hero-trail { top: calc(100% - .375rem); }
 .m-hero-media { width: 100%; height: auto; max-height: 10.5rem; }
 .m-hero-facts {
   display: grid;
@@ -1442,9 +1445,7 @@
 .contact-decor > .decor { position: absolute; }
 .contact-sun { top: 1.25rem; right: 1.5rem; }
 .contact-cloud { top: 2.75rem; right: 4.5rem; opacity: .9; }
-.contact-head { position: relative; }
-/* на телефоне домик стоит в строке короткой надписи «Байланыс», заголовок получает всю ширину */
-.contact-house-m { position: absolute; top: -.75rem; right: 0; width: 3.25rem; height: auto; pointer-events: none; }
+
 .contact-layout {
   display: grid;
   gap: 2rem;
@@ -1457,8 +1458,9 @@
   }
 }
 .contact-actions { display: grid; gap: 1rem; }
-.contact-house { justify-self: end; width: 8rem; height: auto; margin-right: .5rem; }
+
 .contact-info {
+  position: relative;
   padding: 1.25rem;
   border-radius: 1.75rem 1.75rem 1.75rem .75rem;
   border: var(--stroke) solid rgb(255 255 255 / .14);
@@ -1475,14 +1477,71 @@
   color: #f6c85f;
 }
 .contact-info address { font-size: 1.0625rem; line-height: 1.5; }
+/* финал тропинки: следы подходят к домику рядом с адресом */
+.contact-info-house {
+  position: absolute;
+  top: .75rem;
+  right: 1rem;
+  width: 8.5rem;
+  height: auto;
+  pointer-events: none;
+}
+@media (min-width: 40em) {
+  .contact-info { padding-right: 10.5rem; }
+}
 @media (max-width: 39.999em) {
   .contact-info { padding: 1rem; }
+  .contact-info-house { top: .625rem; right: .75rem; width: 4.75rem; }
   .contact-sun { top: .875rem; right: 1rem; }
   .contact-cloud, .contact-sun { display: none; }
   .contact-hill { bottom: -78%; }
 }
 
 /* ───────────────────────── Подвал ───────────────────────── */
+/* ───────────────────────── Фоновые рисунки разделов ─────────────────────────
+   Отдельный слой под содержимым: не перехватывает нажатия, не выходит за секцию.
+   Компьютер — боковые поля и пустые зоны у заголовков; телефон — один мотив. */
+.section > .container-x { position: relative; z-index: 1; }
+.scenery {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden; /* маска только для декоративного слоя */
+  pointer-events: none;
+}
+.scenery-frame {
+  position: relative;
+  height: 100%;
+  max-width: calc(75rem + 2 * var(--gutter));
+  margin-inline: auto;
+}
+.sc { position: absolute; height: auto; }
+.sc-narrow { display: none; }
+@media (max-width: 39.999em) {
+  .sc-wide { display: none; }
+  .sc-narrow { display: block; }
+}
+/* Біз туралы — холм справа, в строке заголовка */
+.sc-about { top: calc(var(--section-pt) - .5rem); right: var(--gutter); width: clamp(10rem, 18vw, 15rem); }
+.sc-about-m { top: calc(var(--section-pt) - .625rem); right: var(--gutter); width: 4.5rem; }
+/* Топтар — следы спускаются к карточкам */
+.sc-groups { top: calc(var(--section-pt) - .25rem); right: calc(var(--gutter) + 1rem); width: clamp(10rem, 17vw, 15rem); }
+.sc-groups-m { top: calc(var(--section-pt) + .25rem); right: var(--gutter); width: 2.75rem; }
+/* Тамақтану — веточка слева под заголовком (левое поле) */
+.sc-meals { bottom: 1.75rem; left: calc(var(--gutter) - 1rem); width: clamp(7rem, 11vw, 9rem); }
+.sc-meals-m { bottom: .375rem; right: var(--gutter); width: 4rem; }
+/* Галерея — один рисунок у внешнего правого края */
+.sc-gallery { top: calc(var(--section-pt) - .5rem); right: var(--gutter); width: 6rem; }
+.sc-gallery-m { top: calc(var(--section-pt) - .5rem); right: var(--gutter); width: 3.5rem; }
+/* Құжаттар — тропинка уходит вправо к контактам, в нижнем поле */
+.sc-docs { bottom: .5rem; right: calc(var(--gutter) + 2rem); width: clamp(11rem, 18vw, 16rem); }
+.sc-docs-m { bottom: .5rem; left: var(--gutter); width: 6.5rem; }
+@media (min-width: 40em) and (max-width: 63.999em) {
+  /* планшет: заголовок групп шире, следы мельче; веточку переносим вправо вниз */
+  .sc-groups { width: 8.5rem; }
+  .sc-meals { left: auto; right: var(--gutter); bottom: .5rem; width: 6rem; }
+}
+
 .site-footer {
   border-top: 1px solid rgb(38 59 49 / .1);
   background: #fff9ee;
@@ -1539,15 +1598,6 @@
   0%, 100% { rotate: -7deg; }
   50% { rotate: 7deg; }
 }
-.sign-sway {
-  transform-box: fill-box;
-  transform-origin: 0% 50%;
-  animation: sign 6s ease-in-out infinite;
-}
-@keyframes sign {
-  0%, 100% { rotate: -3deg; }
-  50% { rotate: 3deg; }
-}
 /* Иллюстрация-заглушка первого экрана (если нет фото) */
 .nod { transform-box: fill-box; transform-origin: 25% 100%; animation: foal-greeting 1400ms 650ms cubic-bezier(.4, 0, .2, 1) both; }
 .butterfly-flight { transform-box: fill-box; transform-origin: center; animation: butterfly-arc 1800ms 2100ms cubic-bezier(.4, 0, .2, 1) both; }
@@ -1580,7 +1630,7 @@
     animation-delay: 0s !important;
     transition-duration: .01ms !important;
   }
-  .spin-slow, .sway-leaf, .sign-sway, .nod, .butterfly-flight, .butterfly-wings, .reveal, .rise { animation: none !important; }
+  .spin-slow, .sway-leaf, .nod, .butterfly-flight, .butterfly-wings, .reveal, .rise { animation: none !important; }
   .btn:hover, .btn:active, .group-card:hover, .gallery-thumb:hover, .meal:hover .meal-plate { transform: none; }
   .btn:hover svg:last-child { translate: none; }
 }

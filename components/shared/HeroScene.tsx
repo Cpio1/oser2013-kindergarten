@@ -1,6 +1,7 @@
 import { site } from '@/lib/site-data';
 import { HeroArtTall, HeroArtWide } from './HeroArt';
 import { Cloud, Petal, SoftStar, SunBadge } from './Motifs';
+import { HeroTrail } from './Scenery';
 
 /**
  * Композиция первого экрана: фото в арке, эмблема-медальон на краю арки,
@@ -49,6 +50,7 @@ export function HeroScene({ variant }: { variant: 'desktop' | 'mobile' }) {
         />
       )}
       <span className="hero-scene-decor" aria-hidden="true">
+        <HeroTrail className="hero-trail" />
         <SunBadge spin className="decor decor-lg hero-sun" />
         <Cloud className="decor decor-md hero-cloud" color="#CFE6F2" />
         <Petal className="decor decor-sm hero-leaf-a" />

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { site } from '@/lib/site-data';
 import { Icon } from './Icons';
 import { SoftStar } from './Motifs';
+import { Scenery } from './Scenery';
 import { Section, SectionHeading } from './ui';
 
 /** Сколько превью видно сразу (совпадает с CSS .gallery-grid) */
@@ -46,6 +47,7 @@ export default function Gallery() {
 
   return (
     <Section id="gallery" className="section-pad">
+      <Scenery kind="gallery" />
       <div className="container-x">
         <SectionHeading id="gallery" eyebrow="Балабақша сәттері" title="Галерея" decor={<SoftStar className="decor decor-xs" />} />
         <ul className="gallery-grid">

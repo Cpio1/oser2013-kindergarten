@@ -1,5 +1,6 @@
 import { documentHref, site } from '@/lib/site-data';
 import { FolderArt } from './Motifs';
+import { Scenery } from './Scenery';
 import { ButtonLink, Section } from './ui';
 
 export function Documents() {
@@ -10,6 +11,7 @@ export function Documents() {
   });
   return (
     <Section id="documents" className="section-pad documents-section">
+      <Scenery kind="documents" />
       <div className="container-x">
         <div className="docs-card reveal">
           <div className="docs-summary">
