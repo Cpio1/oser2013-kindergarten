@@ -51,6 +51,7 @@ export default function Gallery() {
         <ul className="gallery-grid">
           {photos.map((photo, i) => (
             <li key={photo.src} className="gallery-item">
+              <span className="gallery-mat" aria-hidden="true" />
               <button type="button" className="gallery-thumb" onClick={() => open(i)}>
                 <span className="sr-only">Үлкейту: </span>
                 <img
@@ -60,7 +61,6 @@ export default function Gallery() {
                   alt={photo.alt}
                   loading="lazy"
                   decoding="async"
-                  style={{ objectPosition: photo.position ?? '50% 50%' }}
                 />
               </button>
             </li>

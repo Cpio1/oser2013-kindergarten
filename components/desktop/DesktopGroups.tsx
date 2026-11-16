@@ -1,18 +1,19 @@
 import { site } from '@/lib/site-data';
 import { Motif } from '../shared/Motifs';
 
+/**
+ * Каждая группа — свой силуэт (арка, лепестки, лист, облачко) и свой мотив.
+ * Форма рисуется отдельным слоем .group-shape, текст лежит в ровной области.
+ */
 export function DesktopGroups() {
   return (
-    <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
-      {site.groups.map((group, i) => (
-        <li key={group.id} className={`group-card tone-${group.tone} reveal`}>
-          <span className="card-decor" aria-hidden="true">
-            <span className="card-blob" />
+    <ul className="groups-grid">
+      {site.groups.map((group) => (
+        <li key={group.id} className={`group-card group-${group.motif} reveal`}>
+          <span className="group-shape" aria-hidden="true" />
+          <span className="group-medal">
+            <Motif kind={group.motif} className="group-motif" />
           </span>
-          <div className="relative flex items-start justify-between gap-3">
-            <span className="group-num">{String(i + 1).padStart(2, '0')}</span>
-            <Motif kind={group.motif} className="group-motif sway-hover" />
-          </div>
           <h3 className="group-name">«{group.name}»</h3>
           <p className="group-label">{group.label}</p>
           <p className="age-pill">{group.age}</p>

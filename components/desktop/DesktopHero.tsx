@@ -1,8 +1,7 @@
 import { site } from '@/lib/site-data';
-import { HeroArtTall } from '../shared/HeroArt';
 import { HeroFactText } from '../shared/HeroHeading';
 import { Icon } from '../shared/Icons';
-import { Petal, SoftStar } from '../shared/Motifs';
+import { HeroScene } from '../shared/HeroScene';
 import { ButtonLink } from '../shared/ui';
 
 export function DesktopHeroExtras() {
@@ -29,24 +28,9 @@ export function DesktopHeroExtras() {
 }
 
 export function DesktopHeroVisual() {
-  const hero = site.media.hero;
   return (
     <div className="hero-visual rise rise-2">
-      {hero ? (
-        <img
-          src={hero.src}
-          width={hero.width}
-          height={hero.height}
-          alt={hero.alt}
-          fetchPriority="high"
-          decoding="async"
-          className={`hero-media ${hero.transparent || hero.fit === 'contain' ? 'hero-emblem object-contain' : 'hero-photo'}`}
-        />
-      ) : (
-        <HeroArtTall id="desktop" className="hero-media" />
-      )}
-      <SoftStar className="decor decor-md float absolute left-[2%] top-[8%]" />
-      <Petal className="decor decor-sm float float-late absolute bottom-[10%] right-[1%]" />
+      <HeroScene variant="desktop" />
     </div>
   );
 }

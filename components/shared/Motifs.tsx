@@ -88,35 +88,142 @@ export function Motif({ kind, className = 'size-12' }: { kind: MotifKind; classN
 
 export type MealIconKind = 'cup' | 'bowl' | 'apple';
 
-export function MealIcon({ kind, className = 'size-14' }: { kind: MealIconKind; className?: string }) {
+/** Иллюстрации приёмов пищи: чашка и хлеб, тарелка супа, фрукты. Сетка 80 × 64. */
+export function MealIcon({ kind, className = 'meal-art' }: { kind: MealIconKind; className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+    <svg className={className} viewBox="0 0 80 64" fill="none" aria-hidden="true" focusable="false">
       {kind === 'cup' && (
         <g>
-          <ellipse cx="30" cy="55" rx="22" ry="4.5" fill="#EADFC8" />
-          <path d="M46 32.5c10-1 10 13 0 12" stroke="#C9902B" strokeWidth="4" strokeLinecap="round" />
-          <path d="M14 28h32v12c0 10-7 14.5-16 14.5S14 50 14 40Z" fill={C.sun} />
-          <path d="M14 28h32" stroke="#C9902B" strokeWidth="3" strokeLinecap="round" />
-          <path d="M24 22c-4-5 4-7 0-13m10 13c-4-5 4-7 0-13" stroke="#C9902B" strokeWidth="3" strokeLinecap="round" />
-          <circle cx="23" cy="39" r="2.6" fill="#fff" opacity=".55" />
+          <ellipse cx="40" cy="57" rx="30" ry="4.5" fill="#EADFC8" />
+          {/* булочка */}
+          <path d="M8 55c-2-9 4-15 14-15s16 6 14 15Z" fill="#E8B676" />
+          <path d="M14 46c2-2 4-2 6 0m3-2c2-2 4-2 6 0" stroke="#B8794A" strokeWidth="2.2" strokeLinecap="round" />
+          {/* чашка */}
+          <path d="M60 33.5c9-1 9 12 0 11" stroke="#C9902B" strokeWidth="3.6" strokeLinecap="round" />
+          <path d="M34 29h28v11c0 9-6 15-14 15s-14-6-14-15Z" fill={C.sun} />
+          <path d="M34 29h28" stroke="#C9902B" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="48" cy="42" r="3" fill="#fff" opacity=".7" />
+          <path d="M43 23c-3.5-4.5 3.5-6.5 0-11.5m9 11.5c-3.5-4.5 3.5-6.5 0-11.5" stroke="#C9902B" strokeWidth="2.6" strokeLinecap="round" />
         </g>
       )}
       {kind === 'bowl' && (
         <g>
-          <path d="M43.5 29 53 10" stroke={C.clay} strokeWidth="3.5" strokeLinecap="round" />
-          <ellipse cx="54.6" cy="7.6" rx="3.2" ry="4.6" transform="rotate(27 54.6 7.6)" fill={C.clay} />
-          <path d="M8 32h48c0 14-10 23-24 23S8 46 8 32Z" fill={C.apricot} />
-          <ellipse cx="32" cy="32" rx="24" ry="5" fill="#FBD5BF" />
-          <path d="M22 25c-4-5 4-7 0-13" stroke={C.clay} strokeWidth="3" strokeLinecap="round" />
-          <path d="M16 41c2 5 6 7.5 11 8.5" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity=".55" />
+          {/* тарелка */}
+          <ellipse cx="40" cy="54" rx="34" ry="7.5" fill="#FFFFFF" stroke="#E4CDB8" strokeWidth="2" />
+          <ellipse cx="40" cy="53" rx="22" ry="4" fill="#F5EBDD" />
+          {/* суп */}
+          <path d="M16 32h48c0 13-10 21-24 21S16 45 16 32Z" fill={C.apricot} />
+          <ellipse cx="40" cy="32" rx="24" ry="5" fill="#FBD5BF" />
+          <circle cx="32" cy="31.5" r="2.2" fill={C.leafMid} />
+          <circle cx="44" cy="32.5" r="1.8" fill="#E9B54A" />
+          <circle cx="50" cy="31" r="1.6" fill={C.leafMid} />
+          {/* ложка */}
+          <path d="M56 30 67 12" stroke={C.clay} strokeWidth="3.2" strokeLinecap="round" />
+          <ellipse cx="68.4" cy="9.6" rx="3.2" ry="4.6" transform="rotate(31 68.4 9.6)" fill={C.clay} />
+          <path d="M30 25c-3.5-4.5 3.5-6.5 0-11.5" stroke={C.clay} strokeWidth="2.6" strokeLinecap="round" />
+          <path d="M23 41c2 4.5 5.5 6.5 10 7.5" stroke="#fff" strokeWidth="2.8" strokeLinecap="round" opacity=".6" />
         </g>
       )}
       {kind === 'apple' && (
         <g>
-          <path d="M32 20C22 12 9 20 11 34s11 23 21 19c10 4 19-5 21-19s-11-22-21-14Z" fill={C.leafLight} />
-          <path d="M32 20c0-6 2-10 5-12" stroke="#6B4A32" strokeWidth="3" strokeLinecap="round" />
-          <path d="M34.5 14.5C38.5 6.5 47 6 50.5 9c-4 6-11 7.5-16 5.5Z" fill={C.leaf} />
-          <path d="M18.5 31c0-5 3-8.5 7-9.5" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity=".6" />
+          <ellipse cx="40" cy="57" rx="30" ry="4.5" fill="#DCE8CF" />
+          {/* груша */}
+          <path d="M58 22c-5 0-6 7-8 12-3 7-4 20 8 21 12-1 11-14 8-21-2-5-3-12-8-12Z" fill="#F2D06B" />
+          <path d="M58 22c0-4 1-6 3-8" stroke="#6B4A32" strokeWidth="2.6" strokeLinecap="round" />
+          {/* яблоко */}
+          <path d="M30 24C21 17 9 24 11 37s10 20 19 17c9 3 17-4 19-17s-10-20-19-13Z" fill="#E77D5E" />
+          <path d="M30 24c0-6 2-9 5-11" stroke="#6B4A32" strokeWidth="3" strokeLinecap="round" />
+          <path d="M32.5 18C36 11 43.5 10.5 47 13c-3.5 5.5-10 7-14.5 5Z" fill={C.leafMid} />
+          <path d="M17.5 34c0-4.5 2.6-7.6 6.2-8.5" stroke="#fff" strokeWidth="2.8" strokeLinecap="round" opacity=".6" />
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/* ——— Иллюстрации разделов ——— */
+
+/** Папка с листами — «Құжаттар». Сетка 96 × 80. */
+export function FolderArt({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 96 80" fill="none" aria-hidden="true" focusable="false">
+      <ellipse cx="48" cy="75" rx="36" ry="4" fill="#C9DCE6" />
+      <path d="M10 22a6 6 0 0 1 6-6h20l7 7h37a6 6 0 0 1 6 6v38a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6Z" fill="#E3A93A" />
+      <g className="sheet-peek">
+        <rect x="24" y="8" width="44" height="50" rx="5" fill="#FFFFFF" transform="rotate(-7 46 33)" stroke="#E6DCCB" strokeWidth="1.5" />
+        <rect x="30" y="6" width="44" height="50" rx="5" fill="#FFFDF8" transform="rotate(5 52 31)" stroke="#E6DCCB" strokeWidth="1.5" />
+        <path d="M38 18h24M38 25h24M38 32h16" stroke="#9DBBAF" strokeWidth="3" strokeLinecap="round" transform="rotate(5 52 31)" />
+      </g>
+      <path d="M8 36a6 6 0 0 1 6-6h68a6 6 0 0 1 6 6l-3 31a6 6 0 0 1-6 6H17a6 6 0 0 1-6-6Z" fill={C.sun} />
+      <path d="M40 46h16" stroke="#C9902B" strokeWidth="3.4" strokeLinecap="round" />
+      <path d="M78 9c.8 3.4 1.8 4.4 5.2 5.2-3.4.8-4.4 1.8-5.2 5.2-.8-3.4-1.8-4.4-5.2-5.2 3.4-.8 4.4-1.8 5.2-5.2Z" fill={C.apricot} stroke={C.apricot} strokeWidth="1.4" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Домик с указателем — «Байланыс». Сетка 128 × 96. */
+export function HouseArt({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 128 96" fill="none" aria-hidden="true" focusable="false">
+      <ellipse cx="64" cy="90" rx="60" ry="6" fill="#427A5B" />
+      {/* указатель */}
+      <path d="M104 88V44" stroke="#E8D3B5" strokeWidth="4" strokeLinecap="round" />
+      <g className="sign-sway">
+        <path d="M92 46h22l6 6-6 6H92Z" fill={C.apricot} />
+        <path d="M97 52h13" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" opacity=".85" />
+      </g>
+      {/* дом */}
+      <path d="M18 52 50 26l32 26v36H18Z" fill="#FFF9EE" />
+      <path d="M12 54 50 22l38 32" stroke="#E77D5E" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="64" y="22" width="9" height="16" rx="2" fill="#E77D5E" />
+      <path d="M41 88V68a9 9 0 0 1 18 0v20Z" fill={C.leafMid} />
+      <circle cx="54.5" cy="77" r="1.6" fill={C.sun} />
+      <rect x="24" y="58" width="12" height="12" rx="3" fill="#BFE0F0" />
+      <rect x="64" y="58" width="12" height="12" rx="3" fill="#BFE0F0" />
+      <path d="M50 46a5 5 0 1 1 0-.1" fill={C.sun} />
+      {/* кусты */}
+      <circle cx="16" cy="84" r="7" fill={C.leafLight} />
+      <circle cx="25" cy="86" r="5" fill="#7FB070" />
+      <circle cx="84" cy="85" r="5.5" fill={C.leafLight} />
+    </svg>
+  );
+}
+
+/** Маленькие иллюстрации фактов «Біз туралы». Сетка 40 × 40. */
+export type FactArtKind = 'pin' | 'book' | 'blocks' | 'spoon';
+export function FactArt({ kind, className = 'size-7' }: { kind: FactArtKind; className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+      {kind === 'pin' && (
+        <g>
+          <ellipse cx="20" cy="35" rx="9" ry="2.6" fill="#E4CDB8" />
+          <path d="M20 35s-10-9-10-17a10 10 0 0 1 20 0c0 8-10 17-10 17Z" fill="#E77D5E" />
+          <circle cx="20" cy="18" r="4" fill="#FFF9EE" />
+        </g>
+      )}
+      {kind === 'book' && (
+        <g>
+          <path d="M5 10c5-2 10-2 15 1v22c-5-3-10-3-15-1Z" fill={C.leafMid} />
+          <path d="M35 10c-5-2-10-2-15 1v22c5-3 10-3 15-1Z" fill={C.leafLight} />
+          <path d="M9 16c2.5-.6 5-.4 7 .6M9 21c2.5-.6 5-.4 7 .6M24 16.6c2-1 4.5-1.2 7-.6M24 21.6c2-1 4.5-1.2 7-.6" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
+        </g>
+      )}
+      {kind === 'blocks' && (
+        <g>
+          <rect x="4" y="20" width="15" height="15" rx="3.5" fill={C.apricot} />
+          <rect x="21" y="20" width="15" height="15" rx="3.5" fill="#8CC2DE" />
+          <rect x="12.5" y="5" width="15" height="15" rx="3.5" fill={C.sun} transform="rotate(8 20 12.5)" />
+          <circle cx="11.5" cy="27.5" r="2.4" fill="#fff" />
+          <path d="M25 27.5h7" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" />
+          <path d="M20 9.5v6" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" />
+        </g>
+      )}
+      {kind === 'spoon' && (
+        <g>
+          <ellipse cx="18" cy="24" rx="14" ry="10" fill="#FFFFFF" stroke="#E4CDB8" strokeWidth="2" />
+          <ellipse cx="18" cy="23" rx="8" ry="5" fill={C.apricot} />
+          <path d="M34 34 30 14" stroke={C.clay} strokeWidth="2.6" strokeLinecap="round" />
+          <ellipse cx="29.4" cy="9.5" rx="2.8" ry="4.2" transform="rotate(-11 29.4 9.5)" fill={C.clay} />
         </g>
       )}
     </svg>
@@ -169,10 +276,10 @@ export function Petal({ className = 'decor', color = C.leafLight }: DecorProps) 
   );
 }
 
-export function SunBadge({ className = 'decor' }: DecorProps) {
+export function SunBadge({ className = 'decor', spin = false }: DecorProps & { spin?: boolean }) {
   return (
     <svg className={className} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-      <g className="spin-slow">
+      <g className={spin ? 'spin-slow' : undefined}>
         {Array.from({ length: 8 }, (_, i) => (
           <rect key={i} x="22" y="2" width="4" height="9" rx="2" fill={C.sunDeep} transform={`rotate(${i * 45} 24 24)`} />
         ))}

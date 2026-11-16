@@ -13,7 +13,7 @@ import { Footer } from '@/components/shared/Footer';
 import Gallery from '@/components/shared/Gallery';
 import Header from '@/components/shared/Header';
 import { HeroHeading } from '@/components/shared/HeroHeading';
-import { Flower, Petal, SoftStar } from '@/components/shared/Motifs';
+import { Cloud, Flower, HouseArt, Petal, SoftStar, SunBadge } from '@/components/shared/Motifs';
 import { DesktopOnly, MobileOnly } from '@/components/shared/Responsive';
 import { Section, SectionHeading } from '@/components/shared/ui';
 import { site } from '@/lib/site-data';
@@ -127,11 +127,18 @@ export default function Home() {
         <Section id="contact" className="section-pad contact-section">
           <div className="container-x">
             <div className="contact-card">
-              <span className="card-decor" aria-hidden="true">
-                <span className="contact-blob" />
+              <span className="contact-decor" aria-hidden="true">
+                <span className="contact-hill" />
+                <SunBadge className="decor decor-md contact-sun" />
+                <Cloud className="decor decor-md contact-cloud" color="#FFF9EE" />
               </span>
               <div className="relative">
-                <SectionHeading id="contact" eyebrow="Байланыс" title="Мекенжайымыз" tone="light" />
+                <div className="contact-head">
+                  <SectionHeading id="contact" eyebrow="Байланыс" title="Мекенжайымыз" tone="light" />
+                  <MobileOnly>
+                    <HouseArt className="contact-house-m" />
+                  </MobileOnly>
+                </div>
                 <DesktopOnly>
                   <DesktopContact />
                 </DesktopOnly>

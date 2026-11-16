@@ -1,22 +1,18 @@
 import { site } from '@/lib/site-data';
-import { Flower, Petal, SoftStar, SunBadge } from './Motifs';
-
-const factDecor = [
-  <Flower key="0" className="decor decor-sm" color="#F3A780" />,
-  <SoftStar key="1" className="decor decor-sm" color="#F6C85F" />,
-  <Petal key="2" className="decor decor-sm" color="#93BF85" />,
-  <SunBadge key="3" className="decor decor-sm" />,
-];
-const factTones = ['tone-apricot', 'tone-sun', 'tone-leaf', 'tone-sky'];
+import { FactArt, Flower, Petal, SoftStar } from './Motifs';
 
 export function AboutFacts({ compact = false }: { compact?: boolean }) {
   return (
-    <dl className={`grid grid-cols-2 ${compact ? 'gap-2.5' : 'gap-3 lg:gap-4'}`}>
+    <dl className={`about-facts ${compact ? 'about-facts-compact' : ''}`}>
       {site.about.facts.map((fact, i) => (
-        <div key={fact.label} className={`fact-tile ${factTones[i]} ${compact ? 'fact-tile-compact' : ''} reveal`}>
-          <span className="fact-decor">{factDecor[i]}</span>
-          <dt className="fact-label">{fact.label}</dt>
-          <dd className="fact-value">{fact.value}</dd>
+        <div key={fact.label} className={`fact-chip fact-${i + 1} reveal`}>
+          <span className="fact-art" aria-hidden="true">
+            <FactArt kind={fact.art} className="fact-art-svg" />
+          </span>
+          <div className="min-w-0">
+            <dt className="fact-label">{fact.label}</dt>
+            <dd className="fact-value">{fact.value}</dd>
+          </div>
         </div>
       ))}
     </dl>
@@ -27,10 +23,26 @@ export function AboutFacts({ compact = false }: { compact?: boolean }) {
 export function AboutMedia({ className = '' }: { className?: string }) {
   const media = site.media.about;
   if (!media) return null;
+  return (
+    <div className={`about-frame ${className}`}>
+      <span className="about-frame-backdrop" aria-hidden="true" />
+      <AboutMediaElement />
+      <span className="about-frame-decor" aria-hidden="true">
+        <Petal className="decor decor-md about-leaf sway-leaf" />
+        <Flower className="decor decor-sm about-flower" color="#F3A780" />
+        <SoftStar className="decor decor-xs about-star" />
+      </span>
+    </div>
+  );
+}
+
+function AboutMediaElement() {
+  const media = site.media.about;
+  if (!media) return null;
   if (media.kind === 'video') {
     return (
       <video
-        className={`about-media ${className}`}
+        className="about-media"
         controls
         playsInline
         preload="metadata"
@@ -45,7 +57,7 @@ export function AboutMedia({ className = '' }: { className?: string }) {
   }
   return (
     <img
-      className={`about-media ${media.transparent ? 'object-contain' : 'object-cover'} ${className}`}
+      className={`about-media ${media.transparent ? 'object-contain' : 'object-cover'}`}
       src={media.src}
       width={media.width}
       height={media.height}

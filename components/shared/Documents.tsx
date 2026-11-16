@@ -1,5 +1,5 @@
 import { documentHref, site } from '@/lib/site-data';
-import { Icon } from './Icons';
+import { FolderArt } from './Motifs';
 import { ButtonLink, Section } from './ui';
 
 export function Documents() {
@@ -14,8 +14,9 @@ export function Documents() {
         <div className="docs-card reveal">
           <div className="docs-summary">
             <div className="docs-heading">
-              <span className="docs-icon"><Icon name="folder" className="size-6" /></span>
-              <div>
+              <FolderArt className="docs-art" />
+              <div className="min-w-0">
+                <p className="eyebrow text-leaf">Ата-аналарға</p>
                 <h2 id="documents-title" className="section-title">Құжаттар</h2>
                 <p className="mt-2 text-muted">
                   {folder || files.length ? 'Балабақша құжаттарымен танысыңыз' : 'Құжаттар жақында қосылады'}
@@ -23,7 +24,7 @@ export function Documents() {
               </div>
             </div>
             {folder && (
-              <ButtonLink href={folder} icon="folder" external className="w-full sm:w-auto">
+              <ButtonLink href={folder} icon="folder" external className="docs-open w-full sm:w-auto">
                 Құжаттарды ашу
               </ButtonLink>
             )}

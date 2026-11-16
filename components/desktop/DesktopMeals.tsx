@@ -1,13 +1,15 @@
 import { site } from '@/lib/site-data';
 import { MealIcon } from '../shared/Motifs';
 
+/** Три тарелки на лепестковых подложках, средняя чуть ниже — мягкий ритм */
 export function DesktopMeals() {
   return (
-    <ol className="grid grid-cols-3 gap-4 lg:gap-6">
+    <ol className="meals-row">
       {site.meals.map((meal, i) => (
-        <li key={meal.id} className="meal-card reveal">
-          <span className={`meal-blob tone-${meal.tone}`}>
-            <MealIcon kind={meal.icon} className="size-14 lg:size-16" />
+        <li key={meal.id} className={`meal meal-${meal.tone} reveal`}>
+          <span className="meal-plate">
+            <span className="meal-petals" aria-hidden="true" />
+            <MealIcon kind={meal.icon} className="meal-art" />
           </span>
           <span className="meal-order" aria-hidden="true">
             {i + 1}

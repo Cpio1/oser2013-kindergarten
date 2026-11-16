@@ -90,11 +90,11 @@ export const site = {
       'Балалар жасына қарай төрт топқа бөлінеді. Күніне үш мезгіл тамақтану қарастырылған: таңғы ас, түскі ас және бесін ас.',
     ],
     facts: [
-      { label: 'Орналасуы', value: 'Қарақыстақ ауылы' },
-      { label: 'Оқыту тілі', value: 'Қазақ тілі' },
-      { label: 'Топ саны', value: '4' },
-      { label: 'Тамақтану', value: 'Күніне 3 мезгіл' },
-    ],
+      { label: 'Орналасуы', value: 'Қарақыстақ ауылы', art: 'pin' },
+      { label: 'Оқыту тілі', value: 'Қазақ тілі', art: 'book' },
+      { label: 'Топ саны', value: '4 топ', art: 'blocks' },
+      { label: 'Тамақтану', value: 'Күніне 3 мезгіл', art: 'spoon' },
+    ] as { label: string; value: string; art: 'pin' | 'book' | 'blocks' | 'spoon' }[],
   },
 
   /** Компактные факты первого экрана: before + выделенная часть + after */
@@ -150,8 +150,10 @@ export const site = {
     logo: { kind: 'image', src: '/images/optimized/logo.webp', width: 128, height: 128, alt: 'Осер 2013 балабақшасының эмблемасы' } as ImageMedia | null,
     /** main-page */
     hero: { kind: 'image', src: '/images/optimized/main-page.png', width: 720, height: 720, alt: 'Осер 2013 бөбекжай бақшасының эмблемасы', fit: 'contain' } as ImageMedia | null,
-    /** main-page2: определить реальный тип файла (изображение или видео) */
-    about: null as ImageMedia | VideoMedia | null,
+    /** Фото в арке первого экрана рядом с эмблемой (кадр 8:7, дети в центре) */
+    heroPhoto: { kind: 'image', src: '/images/optimized/image21.webp', width: 1600, height: 1200, alt: 'Ұлттық киім киген балалар балабақша ауласында' } as ImageMedia | null,
+    /** main-page2: изображение или видео для «Біз туралы» */
+    about: { kind: 'image', src: '/images/optimized/image22.webp', width: 1600, height: 1200, alt: 'Ойын бөлмесінде шеңбер құрып отырған балалар мен тәрбиешілер' } as ImageMedia | VideoMedia | null,
   },
 
   gallery: [
