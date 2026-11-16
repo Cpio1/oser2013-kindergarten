@@ -225,7 +225,7 @@ export function Cloud({ className = 'decor', color = '#FFFFFF' }: DecorProps) {
   );
 }
 
-export function SoftStar({ className = 'decor', color = C.sun }: DecorProps) {
+export function SoftStar({ className = 'decor', color = '#FFD34D' }: DecorProps) {
   return (
     <svg className={className} viewBox="0 0 40 40" aria-hidden="true" focusable="false">
       <path
@@ -253,10 +253,10 @@ export function SunBadge({ className = 'decor', spin = false }: DecorProps & { s
     <svg className={className} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
       <g className={spin ? 'spin-slow' : undefined}>
         {Array.from({ length: 8 }, (_, i) => (
-          <rect key={i} x="22" y="2" width="4" height="9" rx="2" fill={C.sunDeep} transform={`rotate(${i * 45} 24 24)`} />
+          <rect key={i} x="22" y="2" width="4" height="9" rx="2" fill="#FFA928" transform={`rotate(${i * 45} 24 24)`} />
         ))}
       </g>
-      <circle cx="24" cy="24" r="11" fill={C.sun} />
+      <circle cx="24" cy="24" r="11" fill="#FFD34D" />
     </svg>
   );
 }

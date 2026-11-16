@@ -12,7 +12,7 @@ const G = {
   mid: '#5E9A6C',
   light: '#93BF85',
   pale: '#E4EFDA',
-  path: '#EFE3C8',
+  path: '#F1DCA8',
   sun: '#F6C85F',
   apricot: '#F3A780',
   coral: '#E77D5E',
@@ -71,7 +71,7 @@ export function HeroTrail({ className = '' }: { className?: string }) {
   return (
     <Svg className={className} viewBox="0 0 330 72">
       <path d="M30 26C90 50 170 58 290 32" stroke={G.path} strokeWidth="18" strokeLinecap="round" />
-      <path d="M30 26C90 50 170 58 290 32" stroke={G.line} strokeWidth="1.6" strokeLinecap="round" strokeDasharray="2 7" opacity=".55" />
+      <path d="M30 26C90 50 170 58 290 32" stroke={G.line} strokeWidth="1.6" strokeLinecap="round" strokeDasharray="2 7" opacity=".9" />
       {prints.map(([x, y, r]) => (
         <Hoof key={x} x={x} y={y} rot={r} s={0.85} />
       ))}
@@ -117,7 +117,7 @@ function GroupsTrail({ className, small = false }: { className: string; small?: 
   const prints = small ? narrow : wide;
   return (
     <Svg className={className} viewBox={small ? '0 0 60 48' : '0 0 240 110'}>
-      {!small && <path d="M226 6C190 30 150 60 80 102" stroke={G.path} strokeWidth="14" strokeLinecap="round" opacity=".8" />}
+      {!small && <path d="M226 6C190 30 150 60 80 102" stroke={G.path} strokeWidth="14" strokeLinecap="round" />}
       {prints.map(([x, y, r]) => (
         <Hoof key={`${x}-${y}`} x={x} y={y} rot={r} s={small ? 0.9 : 1} />
       ))}
@@ -136,10 +136,10 @@ function Berries({ className }: { className: string }) {
       <path d="M86 36c2-12 12-18 24-14-2 12-12 17-24 14Z" fill={G.light} stroke={G.line} strokeWidth="2" strokeLinejoin="round" />
       <path d="M24 58c-8-6-8-16-2-22 8 4 8 15 2 22Z" fill={G.pale} stroke={G.line} strokeWidth="2" strokeLinejoin="round" />
       <path d="M64 44l4 12M104 28l6 12" stroke={G.line} strokeWidth="2" strokeLinecap="round" />
-      <circle cx="68" cy="60" r="6" fill={G.coral} stroke={G.line} strokeWidth="1.8" />
-      <circle cx="79" cy="57" r="5" fill={G.apricot} stroke={G.line} strokeWidth="1.8" />
-      <circle cx="110" cy="44" r="6" fill={G.coral} stroke={G.line} strokeWidth="1.8" />
-      <circle cx="121" cy="40" r="4.6" fill={G.sun} stroke={G.line} strokeWidth="1.8" />
+      <circle cx="68" cy="60" r="6" fill="#F45F61" stroke={G.line} strokeWidth="1.8" />
+      <circle cx="79" cy="57" r="5" fill="#FF963F" stroke={G.line} strokeWidth="1.8" />
+      <circle cx="110" cy="44" r="6" fill="#F45F61" stroke={G.line} strokeWidth="1.8" />
+      <circle cx="121" cy="40" r="4.6" fill="#FFD34D" stroke={G.line} strokeWidth="1.8" />
       <circle cx="66" cy="58" r="1.6" fill="#fff" opacity=".8" />
       <circle cx="108" cy="42" r="1.6" fill="#fff" opacity=".8" />
     </Svg>
@@ -168,7 +168,7 @@ function DocsTrail({ className, small = false }: { className: string; small?: bo
     : [[20, 26, 100], [48, 16, 92], [78, 24, 96], [108, 14, 90], [138, 22, 94], [168, 12, 88], [198, 20, 92], [228, 12, 86]];
   return (
     <Svg className={className} viewBox={small ? '0 0 120 28' : '0 0 270 40'}>
-      {!small && <path d="M8 24C80 34 170 6 262 16" stroke={G.path} strokeWidth="14" strokeLinecap="round" opacity=".8" />}
+      {!small && <path d="M8 24C80 34 170 6 262 16" stroke={G.path} strokeWidth="14" strokeLinecap="round" />}
       {prints.map(([x, y, r]) => (
         <Hoof key={x} x={x} y={y} rot={r} s={small ? 0.8 : 1} />
       ))}
@@ -184,7 +184,7 @@ export function SkyCloud({ className = '' }: { className?: string }) {
   const lobes = 'M18 52C7 52 2 44 4 37s10-11 17-9C22 18 32 10 44 12c6-9 20-11 29-3 7-6 19-5 25 3 10-2 19 6 18 16 6 3 7 11 3 17-3 5-8 7-13 7Z';
   return (
     <svg className={className} viewBox="0 0 124 60" fill="none" aria-hidden="true" focusable="false">
-      <path d={lobes} transform="translate(2 6)" fill="#BCD9EA" />
+      <path d={lobes} transform="translate(2 5)" fill="#8EC3E6" opacity=".75" />
       <path d={lobes} fill="#FFFFFF" />
       <path d="M30 40c6 4 14 4 20 0" stroke="#E3EFF6" strokeWidth="3" strokeLinecap="round" />
     </svg>
@@ -197,10 +197,10 @@ export function SmileSun({ className = '' }: { className?: string }) {
     <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
       <g className="spin-slow">
         {Array.from({ length: 10 }, (_, i) => (
-          <rect key={i} x="30" y="2" width="4" height="9" rx="2" fill="#F2B544" transform={`rotate(${i * 36} 32 32)`} />
+          <rect key={i} x="30" y="2" width="4" height="9" rx="2" fill="#FFA928" transform={`rotate(${i * 36} 32 32)`} />
         ))}
       </g>
-      <circle cx="32" cy="32" r="17" fill="#F6C85F" stroke="#E3A93A" strokeWidth="2" />
+      <circle cx="32" cy="32" r="17" fill="#FFD34D" stroke="#F3A21F" strokeWidth="2" />
       <path d="M24.5 30q2.5-3 5 0M34.5 30q2.5-3 5 0" stroke="#624524" strokeWidth="2" strokeLinecap="round" />
       <path d="M26.5 36q5.5 5 11 0" stroke="#624524" strokeWidth="2" strokeLinecap="round" />
       <circle cx="22.5" cy="36" r="2.6" fill="#EC9971" opacity=".75" />
@@ -214,11 +214,11 @@ export function Balloons({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 64 112" fill="none" aria-hidden="true" focusable="false">
       <path d="M20 46c-3 14 6 22 2 36s4 22 8 28M44 38c2 16-6 26-2 40s-8 26-12 32" stroke="#6B7F75" strokeWidth="1.2" strokeLinecap="round" />
-      <ellipse cx="20" cy="26" rx="15" ry="19" fill="#F08A6C" />
-      <path d="M17 45h6l-3-4Z" fill="#E0704F" />
+      <ellipse cx="20" cy="26" rx="15" ry="19" fill="#F45F61" />
+      <path d="M17 45h6l-3-4Z" fill="#D9474A" />
       <ellipse cx="14" cy="19" rx="3.5" ry="6" transform="rotate(20 14 19)" fill="#fff" opacity=".55" />
-      <ellipse cx="44" cy="20" rx="14" ry="17.5" fill="#F6C85F" />
-      <path d="M41 37h6l-3-4Z" fill="#E3A93A" />
+      <ellipse cx="44" cy="20" rx="14" ry="17.5" fill="#FFD34D" />
+      <path d="M41 37h6l-3-4Z" fill="#F3A21F" />
       <ellipse cx="38.5" cy="13.5" rx="3.2" ry="5.5" transform="rotate(20 38.5 13.5)" fill="#fff" opacity=".6" />
     </svg>
   );
@@ -231,25 +231,25 @@ export function Rainbow({ className = '', single = false }: { className?: string
       <svg className={className} viewBox="0 0 100 44" fill="none" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="rainbow-one" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0" stopColor="#F08A6C" />
-            <stop offset=".5" stopColor="#F6C85F" />
-            <stop offset="1" stopColor="#8CC58A" />
+            <stop offset="0" stopColor="#F45F61" />
+            <stop offset=".5" stopColor="#FF963F" />
+            <stop offset="1" stopColor="#FFD34D" />
           </linearGradient>
         </defs>
-        <path d="M8 44a42 42 0 0 1 84 0" stroke="url(#rainbow-one)" strokeWidth="6" strokeLinecap="round" />
+        <path d="M8 44a42 42 0 0 1 84 0" stroke="url(#rainbow-one)" strokeWidth="7" strokeLinecap="round" />
       </svg>
     );
   }
   return (
     <svg className={className} viewBox="0 0 100 50" fill="none" aria-hidden="true" focusable="false">
-      <path d="M5 50a45 45 0 0 1 90 0" stroke="#F08A6C" strokeWidth="6" />
-      <path d="M11 50a39 39 0 0 1 78 0" stroke="#F6C85F" strokeWidth="6" />
-      <path d="M17 50a33 33 0 0 1 66 0" stroke="#8CC58A" strokeWidth="6" />
+      <path d="M5 50a45 45 0 0 1 90 0" stroke="#F45F61" strokeWidth="6" />
+      <path d="M11 50a39 39 0 0 1 78 0" stroke="#FF963F" strokeWidth="6" />
+      <path d="M17 50a33 33 0 0 1 66 0" stroke="#FFD34D" strokeWidth="6" />
     </svg>
   );
 }
 
-function Twinkle({ x, y, s = 1, color = '#F6C85F' }: { x: number; y: number; s?: number; color?: string }) {
+function Twinkle({ x, y, s = 1, color = '#FFD34D' }: { x: number; y: number; s?: number; color?: string }) {
   return (
     <path
       transform={`translate(${x} ${y}) scale(${s})`}
@@ -267,7 +267,7 @@ export function Stars({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 48 40" fill="none" aria-hidden="true" focusable="false">
       <Twinkle x={14} y={24} s={1.3} />
-      <Twinkle x={36} y={10} s={0.85} color="#F3A780" />
+      <Twinkle x={36} y={10} s={0.85} color="#FF963F" />
     </svg>
   );
 }
@@ -338,7 +338,7 @@ export function HouseTrail({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 168 100" fill="none" aria-hidden="true" focusable="false">
       <ellipse cx="112" cy="93" rx="54" ry="6" fill="#427A5B" />
-      <path d="M4 90C24 84 40 90 66 86" stroke="#F6C85F" strokeOpacity=".35" strokeWidth="10" strokeLinecap="round" />
+      <path d="M4 90C24 84 40 90 66 86" stroke="#FFD34D" strokeOpacity=".55" strokeWidth="10" strokeLinecap="round" />
       {[[10, 88, 80], [24, 84, 84], [38, 89, 88], [52, 84, 92]].map(([x, y, r]) => (
         <path
           key={x}
@@ -348,7 +348,7 @@ export function HouseTrail({ className = '' }: { className?: string }) {
         />
       ))}
       <Twinkle x={150} y={14} s={0.9} />
-      <Twinkle x={160} y={34} s={0.6} color="#F3A780" />
+      <Twinkle x={160} y={34} s={0.6} color="#FF963F" />
       <g transform="translate(46 0)">
         <path d="M18 52 50 26l32 26v36H18Z" fill="#FFF9EE" />
         <path d="M12 54 50 22l38 32" stroke="#E77D5E" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
