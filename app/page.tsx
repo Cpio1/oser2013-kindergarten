@@ -15,7 +15,7 @@ import Header from '@/components/shared/Header';
 import { HeroHeading } from '@/components/shared/HeroHeading';
 import { Cloud, Flower, Petal, SoftStar, SunBadge } from '@/components/shared/Motifs';
 import { DesktopOnly, MobileOnly } from '@/components/shared/Responsive';
-import { Scenery } from '@/components/shared/Scenery';
+import { HeroSky, Scenery } from '@/components/shared/Scenery';
 import { Section, SectionHeading } from '@/components/shared/ui';
 import { site } from '@/lib/site-data';
 
@@ -50,6 +50,7 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         {/* Басты бет */}
         <Section id="home" className="hero" labelledBy={false}>
+          <HeroSky />
           <div className="container-x hero-grid">
             <div className="hero-copy">
               <HeroHeading />

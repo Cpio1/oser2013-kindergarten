@@ -539,9 +539,26 @@
   padding-top: var(--section-pt);
   padding-bottom: 1.75rem;
   overflow-x: clip; /* декор у края экрана не создаёт горизонтальную прокрутку */
-  background:
-    radial-gradient(38rem 24rem at 92% 8%, rgb(221 238 246 / .9), transparent 70%),
-    radial-gradient(26rem 18rem at 0% 100%, rgb(253 240 204 / .8), transparent 70%);
+  /* солнечное небо: светло-голубой верх, тёплое жёлтое свечение внизу */
+  background-color: #d7ecf7;
+  background-image:
+    radial-gradient(70% 55% at 30% 100%, rgb(253 222 140 / .7), transparent 70%),
+    radial-gradient(40% 45% at 100% 100%, rgb(253 232 180 / .6), transparent 70%),
+    linear-gradient(180deg, #cde7f5 0%, #e2f1f9 48%, #fbf1d6 100%);
+}
+/* мягкий облачный край — переход к следующему разделу */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2.5rem;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 40'%3E%3Cg fill='%23FFFFFF' opacity='.7'%3E%3Ccircle cx='0' cy='24' r='14'/%3E%3Ccircle cx='32' cy='20' r='18'/%3E%3Ccircle cx='68' cy='24' r='15'/%3E%3Ccircle cx='100' cy='18' r='19'/%3E%3Ccircle cx='138' cy='24' r='15'/%3E%3Ccircle cx='172' cy='19' r='18'/%3E%3Ccircle cx='208' cy='24' r='15'/%3E%3Ccircle cx='240' cy='24' r='14'/%3E%3C/g%3E%3Cg fill='%23FFF9EE'%3E%3Crect y='30' width='240' height='10'/%3E%3Ccircle cx='0' cy='30' r='12'/%3E%3Ccircle cx='32' cy='27' r='15'/%3E%3Ccircle cx='68' cy='31' r='12'/%3E%3Ccircle cx='100' cy='26' r='16'/%3E%3Ccircle cx='138' cy='31' r='12'/%3E%3Ccircle cx='172' cy='27' r='15'/%3E%3Ccircle cx='208' cy='31' r='12'/%3E%3Ccircle cx='240' cy='30' r='12'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom left / 15rem 2.5rem;
+}
+@media (max-width: 39.999em) {
+  .hero::after { height: 1.75rem; background-size: 10.5rem 1.75rem; }
 }
 @media (min-width: 40em) {
   .hero {
@@ -549,7 +566,7 @@
     display: flex;
     align-items: center;
     min-height: min(calc(100svh - var(--header-h)), 54rem);
-    padding-bottom: var(--section-pt);
+    padding-bottom: calc(var(--section-pt) + 1rem);
   }
 }
 .hero-grid { display: grid; }
@@ -678,6 +695,26 @@
   border-radius: 50% 50% 40% 44%;
   rotate: -9deg;
 }
+.hero-rainbow {
+  /* три дуги: верх выглядывает над рамкой, концы уходят за фото */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: auto;
+  translate: 0 -24%;
+  pointer-events: none;
+}
+.hero-scene-mobile .hero-rainbow { translate: 0 -23%; }
+.hero-cloud-m {
+  position: absolute;
+  top: 14%;
+  right: -40%;
+  width: 36%;
+  height: auto;
+  pointer-events: none;
+}
 .hero-arch {
   aspect-ratio: 8 / 7;
   overflow: hidden; /* маска только для фото */
@@ -707,8 +744,6 @@
   pointer-events: none;
 }
 .hero-scene-decor > * { position: absolute; }
-.hero-sun { top: -9%; right: -9%; }
-.hero-cloud { top: 8%; left: -15%; }
 .hero-leaf-a { right: -10%; bottom: 12%; }
 .hero-leaf-b { right: -5%; bottom: 3%; rotate: 40deg; }
 .hero-star { top: -7%; left: 22%; }
@@ -751,8 +786,6 @@
   border-radius: 52% 48% 1.5rem 1rem / 48% 44% 1.5rem 1rem;
 }
 .hero-scene-mobile .hero-badge { width: 38%; left: -18%; bottom: -10%; }
-.hero-scene-mobile .hero-sun { top: -12%; right: -14%; }
-.hero-scene-mobile .hero-cloud { top: 12%; left: -20%; }
 .hero-scene-mobile .hero-leaf-a { right: -14%; bottom: 10%; }
 .hero-scene-mobile .hero-leaf-b { right: -9%; bottom: 0; }
 .hero-scene-mobile .hero-trail { top: calc(100% - .375rem); }
@@ -906,10 +939,6 @@
 }
 
 /* ───────────────────────── Топтар ───────────────────────── */
-.groups-section {
-  background:
-    radial-gradient(22rem 14rem at 100% 0%, rgb(253 240 204 / .55), transparent 70%);
-}
 .groups-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1528,7 +1557,7 @@
 .sc-groups { top: calc(var(--section-pt) - .25rem); right: calc(var(--gutter) + 1rem); width: clamp(10rem, 17vw, 15rem); }
 .sc-groups-m { top: calc(var(--section-pt) + .25rem); right: var(--gutter); width: 2.75rem; }
 /* Тамақтану — веточка слева под заголовком (левое поле) */
-.sc-meals { bottom: 1.75rem; left: calc(var(--gutter) - 1rem); width: clamp(7rem, 11vw, 9rem); }
+.sc-meals { bottom: .25rem; left: calc(var(--gutter) - 1rem); width: clamp(7rem, 11vw, 9rem); }
 .sc-meals-m { bottom: .375rem; right: var(--gutter); width: 4rem; }
 /* Галерея — один рисунок у внешнего правого края */
 .sc-gallery { top: calc(var(--section-pt) - .5rem); right: var(--gutter); width: 6rem; }
@@ -1540,6 +1569,52 @@
   /* планшет: заголовок групп шире, следы мельче; веточку переносим вправо вниз */
   .sc-groups { width: 8.5rem; }
   .sc-meals { left: auto; right: var(--gutter); bottom: .5rem; width: 6rem; }
+}
+
+/* ───────────────────────── Небо: солнце, облака, шарики ───────────────────────── */
+.sky-sun { top: .75rem; left: calc(var(--gutter) - .25rem); width: 3.75rem; }
+.sky-cloud-mid { top: 1.25rem; left: 50%; translate: -50% 0; width: clamp(6rem, 9vw, 8rem); }
+.sky-cloud-edge { top: 34%; right: -3.25rem; width: clamp(6rem, 8vw, 7.5rem); }
+.sky-balloons { bottom: 2.75rem; left: calc(var(--gutter) - 4.25rem); width: 3.5rem; }
+@media (max-width: 63.999em) {
+  /* планшет: солнце справа, чтобы не задевать строку с названием */
+  .sky-sun { left: auto; right: var(--gutter); width: 3rem; }
+  .sky-cloud-mid, .sky-balloons { display: none; }
+}
+@media (max-width: 39.999em) {
+  /* телефон: небольшое солнце сбоку от заголовка */
+  .sky-sun { top: calc(var(--section-pt) - .375rem); width: 2.25rem; }
+  .hero-kicker { padding-right: 2.75rem; } /* место для солнца; строка и так переносится */
+}
+/* продолжение неба в разделах (компьютер) */
+.sky-about-cloud { top: calc(var(--section-pt) + 2.5rem); left: -4.5rem; width: 6rem; }
+.sky-meals-stars { bottom: 1.5rem; left: calc(var(--gutter) + 8.25rem); width: 2.5rem; }
+.sky-gallery-cloud { top: 45%; left: -4.25rem; width: 6rem; }
+.sky-gallery-stars { bottom: 18%; right: -2.5rem; width: 2.5rem; }
+.sky-docs-cloud { top: .5rem; right: calc(var(--gutter) + 3rem); width: 5.5rem; }
+@media (max-width: 79.999em) {
+  /* узкие поля: облака у края выглядывают меньше */
+  .sky-about-cloud, .sky-gallery-cloud { left: -5rem; }
+  .sky-gallery-stars { right: -2rem; }
+}
+/* тёплое свечение в углах */
+.groups-section {
+  background:
+    radial-gradient(24rem 16rem at 100% 0%, rgb(253 232 170 / .55), transparent 70%),
+    radial-gradient(20rem 14rem at 0% 100%, rgb(252 222 200 / .45), transparent 70%);
+}
+.contact-section {
+  background: radial-gradient(26rem 18rem at 0% 100%, rgb(253 228 160 / .55), transparent 70%);
+}
+.contact-decor::before {
+  content: "";
+  position: absolute;
+  top: -6rem;
+  right: -6rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(246 200 95 / .28), transparent 65%);
 }
 
 .site-footer {

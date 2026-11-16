@@ -177,6 +177,115 @@ function DocsTrail({ className, small = false }: { className: string; small?: bo
   );
 }
 
+/* ═══════════ Солнечное небо ═══════════ */
+
+/** Белое облако из нескольких округлых долей с голубоватой тенью */
+export function SkyCloud({ className = '' }: { className?: string }) {
+  const lobes = 'M18 52C7 52 2 44 4 37s10-11 17-9C22 18 32 10 44 12c6-9 20-11 29-3 7-6 19-5 25 3 10-2 19 6 18 16 6 3 7 11 3 17-3 5-8 7-13 7Z';
+  return (
+    <svg className={className} viewBox="0 0 124 60" fill="none" aria-hidden="true" focusable="false">
+      <path d={lobes} transform="translate(2 6)" fill="#BCD9EA" />
+      <path d={lobes} fill="#FFFFFF" />
+      <path d="M30 40c6 4 14 4 20 0" stroke="#E3EFF6" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** Улыбающееся солнце с короткими лучами */
+export function SmileSun({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+      <g className="spin-slow">
+        {Array.from({ length: 10 }, (_, i) => (
+          <rect key={i} x="30" y="2" width="4" height="9" rx="2" fill="#F2B544" transform={`rotate(${i * 36} 32 32)`} />
+        ))}
+      </g>
+      <circle cx="32" cy="32" r="17" fill="#F6C85F" stroke="#E3A93A" strokeWidth="2" />
+      <path d="M24.5 30q2.5-3 5 0M34.5 30q2.5-3 5 0" stroke="#624524" strokeWidth="2" strokeLinecap="round" />
+      <path d="M26.5 36q5.5 5 11 0" stroke="#624524" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="22.5" cy="36" r="2.6" fill="#EC9971" opacity=".75" />
+      <circle cx="41.5" cy="36" r="2.6" fill="#EC9971" opacity=".75" />
+    </svg>
+  );
+}
+
+/** Два воздушных шарика на тонких нитях */
+export function Balloons({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 112" fill="none" aria-hidden="true" focusable="false">
+      <path d="M20 46c-3 14 6 22 2 36s4 22 8 28M44 38c2 16-6 26-2 40s-8 26-12 32" stroke="#6B7F75" strokeWidth="1.2" strokeLinecap="round" />
+      <ellipse cx="20" cy="26" rx="15" ry="19" fill="#F08A6C" />
+      <path d="M17 45h6l-3-4Z" fill="#E0704F" />
+      <ellipse cx="14" cy="19" rx="3.5" ry="6" transform="rotate(20 14 19)" fill="#fff" opacity=".55" />
+      <ellipse cx="44" cy="20" rx="14" ry="17.5" fill="#F6C85F" />
+      <path d="M41 37h6l-3-4Z" fill="#E3A93A" />
+      <ellipse cx="38.5" cy="13.5" rx="3.2" ry="5.5" transform="rotate(20 38.5 13.5)" fill="#fff" opacity=".6" />
+    </svg>
+  );
+}
+
+/** Радуга за фото: три дуги (компьютер) или одна дуга (телефон) */
+export function Rainbow({ className = '', single = false }: { className?: string; single?: boolean }) {
+  if (single) {
+    return (
+      <svg className={className} viewBox="0 0 100 44" fill="none" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="rainbow-one" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#F08A6C" />
+            <stop offset=".5" stopColor="#F6C85F" />
+            <stop offset="1" stopColor="#8CC58A" />
+          </linearGradient>
+        </defs>
+        <path d="M8 44a42 42 0 0 1 84 0" stroke="url(#rainbow-one)" strokeWidth="6" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg className={className} viewBox="0 0 100 50" fill="none" aria-hidden="true" focusable="false">
+      <path d="M5 50a45 45 0 0 1 90 0" stroke="#F08A6C" strokeWidth="6" />
+      <path d="M11 50a39 39 0 0 1 78 0" stroke="#F6C85F" strokeWidth="6" />
+      <path d="M17 50a33 33 0 0 1 66 0" stroke="#8CC58A" strokeWidth="6" />
+    </svg>
+  );
+}
+
+function Twinkle({ x, y, s = 1, color = '#F6C85F' }: { x: number; y: number; s?: number; color?: string }) {
+  return (
+    <path
+      transform={`translate(${x} ${y}) scale(${s})`}
+      d="M0-8C1-3 3-1 8 0 3 1 1 3 0 8-1 3-3 1-8 0-3-1-1-3 0-8Z"
+      fill={color}
+      stroke={color}
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+  );
+}
+
+/** Пара маленьких звёздочек */
+export function Stars({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 40" fill="none" aria-hidden="true" focusable="false">
+      <Twinkle x={14} y={24} s={1.3} />
+      <Twinkle x={36} y={10} s={0.85} color="#F3A780" />
+    </svg>
+  );
+}
+
+/** Небо первого экрана: солнце, облака, шарики (радуга — в HeroScene) */
+export function HeroSky() {
+  return (
+    <div className="scenery hero-sky" aria-hidden="true">
+      <div className="scenery-frame">
+        <SmileSun className="sc sky-sun" />
+        <SkyCloud className="sc sc-wide sky-cloud-mid" />
+        <SkyCloud className="sc sc-wide sky-cloud-edge" />
+        <Balloons className="sc sc-wide sky-balloons" />
+      </div>
+    </div>
+  );
+}
+
 export type SceneryKind = 'about' | 'groups' | 'meals' | 'gallery' | 'documents';
 
 /** Декоративный слой раздела: вставляется первым элементом секции */
@@ -188,6 +297,7 @@ export function Scenery({ kind }: { kind: SceneryKind }) {
           <>
             <Hill className="sc sc-wide sc-about" />
             <Hill className="sc sc-narrow sc-about-m" small />
+            <SkyCloud className="sc sc-wide sky-about-cloud" />
           </>
         )}
         {kind === 'groups' && (
@@ -200,18 +310,22 @@ export function Scenery({ kind }: { kind: SceneryKind }) {
           <>
             <Berries className="sc sc-wide sc-meals" />
             <Berries className="sc sc-narrow sc-meals-m" />
+            <Stars className="sc sc-wide sky-meals-stars" />
           </>
         )}
         {kind === 'gallery' && (
           <>
             <FoalPeek className="sc sc-wide sc-gallery" />
             <FoalPeek className="sc sc-narrow sc-gallery-m" />
+            <SkyCloud className="sc sc-wide sky-gallery-cloud" />
+            <Stars className="sc sc-wide sky-gallery-stars" />
           </>
         )}
         {kind === 'documents' && (
           <>
             <DocsTrail className="sc sc-wide sc-docs" />
             <DocsTrail className="sc sc-narrow sc-docs-m" small />
+            <SkyCloud className="sc sc-wide sky-docs-cloud" />
           </>
         )}
       </div>
@@ -233,6 +347,8 @@ export function HouseTrail({ className = '' }: { className?: string }) {
           fill="#F6C85F"
         />
       ))}
+      <Twinkle x={150} y={14} s={0.9} />
+      <Twinkle x={160} y={34} s={0.6} color="#F3A780" />
       <g transform="translate(46 0)">
         <path d="M18 52 50 26l32 26v36H18Z" fill="#FFF9EE" />
         <path d="M12 54 50 22l38 32" stroke="#E77D5E" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />

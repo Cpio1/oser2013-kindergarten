@@ -1,7 +1,7 @@
 import { site } from '@/lib/site-data';
 import { HeroArtTall, HeroArtWide } from './HeroArt';
-import { Cloud, Petal, SoftStar, SunBadge } from './Motifs';
-import { HeroTrail } from './Scenery';
+import { Petal, SoftStar } from './Motifs';
+import { HeroTrail, Rainbow, SkyCloud } from './Scenery';
 
 /**
  * Композиция первого экрана: фото в арке, эмблема-медальон на краю арки,
@@ -28,7 +28,7 @@ export function HeroScene({ variant }: { variant: 'desktop' | 'mobile' }) {
 
   return (
     <div className={`hero-scene hero-scene-${variant}`}>
-      <span className="hero-scene-backdrop" aria-hidden="true" />
+      <Rainbow className="hero-rainbow" single={mobile} />
       <div className="hero-arch">
         <img
           src={photo.src}
@@ -51,8 +51,7 @@ export function HeroScene({ variant }: { variant: 'desktop' | 'mobile' }) {
       )}
       <span className="hero-scene-decor" aria-hidden="true">
         <HeroTrail className="hero-trail" />
-        <SunBadge spin className="decor decor-lg hero-sun" />
-        <Cloud className="decor decor-md hero-cloud" color="#CFE6F2" />
+        {mobile && <SkyCloud className="hero-cloud-m" />}
         <Petal className="decor decor-sm hero-leaf-a" />
         <Petal className="decor decor-xs hero-leaf-b" color="#5E9A6C" />
         <SoftStar className="decor decor-xs hero-star" color="#F3A780" />
