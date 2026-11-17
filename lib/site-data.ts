@@ -50,7 +50,34 @@ export type Group = {
   age: string;
   motif: MotifKind;
   tone: Tone;
+  /**
+   * Видеоролик о группе. Пока null — в окне группы показывается заглушка
+   * «Бейне жақында қосылады». Чтобы подключить: положить файл в public/videos/
+   * и указать { kind: 'video', src: '/videos/kulynshak.mp4', width: 1280, height: 720, label: '…', poster?: '/images/…' }.
+   */
+  video: VideoMedia | null;
 };
+
+export type Meal = {
+  id: 'breakfast' | 'lunch' | 'snack';
+  name: string;
+  /**
+   * Настоящие фотографии блюд садика. Пустой массив — показываются заглушки.
+   * Пример: { src: '/images/meals/breakfast-1.webp', width: 1200, height: 900, alt: 'Таңғы ас: …' }
+   */
+  photos: Photo[];
+};
+
+/**
+ * Недельное меню: изображение (jpg/png/webp) или PDF из public/.
+ * null — в окне показывается «Ас мәзірі жақында қосылады».
+ * Примеры:
+ *   { kind: 'image', src: '/menu/weekly-menu.jpg', width: 1240, height: 1754, alt: 'Апталық ас мәзірі' }
+ *   { kind: 'pdf', src: '/menu/weekly-menu.pdf' }
+ */
+export type WeeklyMenu =
+  | { kind: 'image'; src: string; width: number; height: number; alt: string }
+  | { kind: 'pdf'; src: string };
 
 export type SiteDocument = { name: string; href: string };
 
@@ -89,6 +116,14 @@ export const site = {
       '«Осер 2013» балабақшасы Алматы облысы, Жамбыл ауданындағы Қарақыстақ ауылында орналасқан. Балабақшада оқу мен тәрбие қазақ тілінде жүргізіледі.',
       'Балалар жасына қарай төрт топқа бөлінеді. Күніне үш мезгіл тамақтану қарастырылған: таңғы ас, түскі ас және бесін ас.',
     ],
+    /** «Балабақшаның мақсаты» — текст без сокращений */
+    goal: {
+      title: 'БАЛАБАҚШАНЫҢ МАҚСАТЫ',
+      paragraphs: [
+        'Әрбір баланың жеке қабілеті мен шығармашылық әлеуетін ашуға, жан-жақты дамыған, білімді, тәрбиелі, дені сау, ұлттық құндылықтарды бойына сіңірген тұлға болып қалыптасуына қолайлы орта қалыптастыру.',
+        'Баланың қауіпсіздігі мен денсаулығын сақтай отырып, мейірімділікке, адамгершілікке, отансүйгіштікке тәрбиелеу және ата-анамен тығыз ынтымақтастық орнату.',
+      ],
+    },
     facts: [
       { label: 'Орналасуы', value: 'Қарақыстақ ауылы', art: 'pin' },
       { label: 'Оқыту тілі', value: 'Қазақ тілі', art: 'book' },
@@ -105,17 +140,20 @@ export const site = {
   ],
 
   groups: [
-    { id: 'kulynshak', name: 'Құлыншақ', label: 'Мектепалды даярлық тобы', age: '5 жастан', motif: 'foal', tone: 'apricot' },
-    { id: 'baldauren', name: 'Балдаурен', label: 'Ересек тобы', age: '4 жастан', motif: 'flower', tone: 'sun' },
-    { id: 'balbobek', name: 'Балбөбек', label: 'Орта тобы', age: '3 жастан', motif: 'sprout', tone: 'leaf' },
-    { id: 'bobek', name: 'Бөбек', label: 'Кіші аралас топ', age: '2–3 жас', motif: 'chick', tone: 'sky' },
+    { id: 'kulynshak', name: 'Құлыншақ', label: 'Мектепалды даярлық тобы', age: '5 жастан', motif: 'foal', tone: 'apricot', video: null },
+    { id: 'baldauren', name: 'Балдаурен', label: 'Ересек тобы', age: '4 жастан', motif: 'flower', tone: 'sun', video: null },
+    { id: 'balbobek', name: 'Балбөбек', label: 'Орта тобы', age: '3 жастан', motif: 'sprout', tone: 'leaf', video: null },
+    { id: 'bobek', name: 'Бөбек', label: 'Кіші аралас топ', age: '2–3 жас', motif: 'chick', tone: 'sky', video: null },
   ] satisfies Group[],
 
   meals: [
-    { id: 'breakfast', name: 'Таңғы ас', icon: 'cup', tone: 'sun' },
-    { id: 'lunch', name: 'Түскі ас', icon: 'bowl', tone: 'apricot' },
-    { id: 'snack', name: 'Бесін ас', icon: 'apple', tone: 'leaf' },
-  ] as const,
+    { id: 'breakfast', name: 'Таңғы ас', photos: [] },
+    { id: 'lunch', name: 'Түскі ас', photos: [] },
+    { id: 'snack', name: 'Бесін ас', photos: [] },
+  ] satisfies Meal[] as Meal[],
+
+  /** Апталық ас мәзірі — см. тип WeeklyMenu */
+  weeklyMenu: null as WeeklyMenu | null,
 
   links: {
     /** Предоставленное видео (Reel). Это не профиль аккаунта. */

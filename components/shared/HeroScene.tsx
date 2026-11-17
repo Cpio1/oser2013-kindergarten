@@ -1,12 +1,13 @@
 import { site } from '@/lib/site-data';
 import { HeroArtTall, HeroArtWide } from './HeroArt';
-import { Petal, SoftStar } from './Motifs';
-import { HeroTrail, Rainbow, SkyCloud } from './Scenery';
+import { KidBoy, KidGirl } from './KazakhKids';
+import { SoftStar } from './Motifs';
+import { HeroTrail, Rainbow } from './Scenery';
 
 /**
- * Композиция первого экрана: фото в арке, эмблема-медальон на краю арки,
- * вокруг — небольшие солнце, облако и листочки (отдельный декоративный слой).
- * Двигается только солнце — один акцент на экран.
+ * Композиция первого экрана: фото в арке, крупная эмблема вместо солнца
+ * (над правым краем арки), по сторонам фото — мальчик и девочка
+ * в казахских национальных костюмах (отдельный декоративный слой).
  */
 export function HeroScene({ variant }: { variant: 'desktop' | 'mobile' }) {
   const photo = site.media.heroPhoto;
@@ -51,10 +52,9 @@ export function HeroScene({ variant }: { variant: 'desktop' | 'mobile' }) {
       )}
       <span className="hero-scene-decor" aria-hidden="true">
         <HeroTrail className="hero-trail" />
-        {mobile && <SkyCloud className="hero-cloud-m" />}
-        <Petal className="decor decor-sm hero-leaf-a" />
-        <Petal className="decor decor-xs hero-leaf-b" color="#5E9A6C" />
         <SoftStar className="decor decor-xs hero-star" color="#F3A780" />
+        <KidBoy id={`kid-boy-${variant}`} className="hero-kid hero-kid-boy" />
+        <KidGirl id={`kid-girl-${variant}`} className="hero-kid hero-kid-girl" />
       </span>
     </div>
   );

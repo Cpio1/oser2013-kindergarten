@@ -272,15 +272,13 @@ export function Stars({ className = '' }: { className?: string }) {
   );
 }
 
-/** Небо первого экрана: солнце, облака, шарики (радуга — в HeroScene) */
+/** Небо первого экрана: облака (вместо солнца — эмблема в HeroScene, радуга — там же) */
 export function HeroSky() {
   return (
     <div className="scenery hero-sky" aria-hidden="true">
       <div className="scenery-frame">
-        <SmileSun className="sc sky-sun" />
         <SkyCloud className="sc sc-wide sky-cloud-mid" />
         <SkyCloud className="sc sc-wide sky-cloud-edge" />
-        <Balloons className="sc sc-wide sky-balloons" />
       </div>
     </div>
   );

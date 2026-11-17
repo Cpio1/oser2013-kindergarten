@@ -1,5 +1,5 @@
 import { site } from '@/lib/site-data';
-import { AboutFacts, AboutMedia, AboutText } from '../shared/AboutParts';
+import { AboutFacts, AboutGoal, AboutMedia, AboutText } from '../shared/AboutParts';
 import { ButtonLink } from '../shared/ui';
 
 /** Фото слева, текст справа — зеркально первому экрану */
@@ -14,6 +14,7 @@ export function DesktopAbout() {
           Instagram-да көру
         </ButtonLink>
       </div>
+      <AboutGoal />
     </div>
   );
 }
