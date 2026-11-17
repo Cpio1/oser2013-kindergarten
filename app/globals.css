@@ -1503,117 +1503,70 @@
 .mcards > li { min-width: 0; }
 
 .mcard {
-  --bg: linear-gradient(165deg, #fff6d6, #ffd98c 58%, #ffb35c);
+  --bg: linear-gradient(165deg, #fff6d6, #ffd98c);
   --edge-c: #f08c1a;
   --ink: #b4500c;
-  --glow: #fff8e3;
   position: relative;
-  isolation: isolate;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   height: 100%;
   min-width: 0;
-  padding: 1.25rem .875rem .875rem;
-  overflow: hidden;
+  padding: .4375rem .4375rem .5625rem;
   border: 3px solid #fff;
-  border-radius: var(--shape, 2.75rem 1.25rem 2.25rem 1.5rem);
+  border-radius: var(--shape, 1.75rem .875rem 1.5rem 1rem);
   background: var(--bg);
-  box-shadow: 0 5px 0 var(--edge-c), 0 26px 32px -20px color-mix(in srgb, var(--edge-c) 65%, transparent);
+  box-shadow: 0 5px 0 var(--edge-c), 0 24px 30px -20px color-mix(in srgb, var(--edge-c) 60%, transparent);
+  text-align: left;
   color: #263b31;
   cursor: pointer;
   transition: transform 260ms var(--ease-settle), box-shadow 260ms var(--ease-settle);
 }
-.mcard-breakfast { --bg: linear-gradient(165deg, #fff6d6, #ffd98c 58%, #ffb35c); --edge-c: #f08c1a; --ink: #b4500c; --glow: #fff8e3; --shape: 2.75rem 1.25rem 2.25rem 1.5rem; }
-.mcard-lunch { --bg: linear-gradient(160deg, #ffe4db, #ffb4a0 50%, #6fdccd); --edge-c: #e5604a; --ink: #c23b26; --glow: #fff2ec; --shape: 1.25rem 2.75rem 1.5rem 2.25rem; }
-.mcard-snack { --bg: linear-gradient(165deg, #ecf9df, #ffd9e5 52%, #ffc5a5); --edge-c: #ec6f98; --ink: #c0336a; --glow: #fff6f9; --shape: 2.25rem 2.25rem 1.25rem 2.75rem; }
+.mcard-breakfast { --bg: linear-gradient(165deg, #fff4cf, #ffc978); --edge-c: #f08c1a; --ink: #b4500c; --shape: 1.75rem .875rem 1.5rem 1rem; }
+.mcard-lunch { --bg: linear-gradient(160deg, #ffd9cf, #8fe1d6); --edge-c: #e5604a; --ink: #c23b26; --shape: .875rem 1.75rem 1rem 1.5rem; }
+.mcard-snack { --bg: linear-gradient(165deg, #e6f7d8, #ffcfdf); --edge-c: #ec6f98; --ink: #c0336a; --shape: 1.5rem 1.5rem .875rem 1.75rem; }
 .mcard:focus-visible { outline: 3px solid #2f5e45; outline-offset: 4px; }
 @media (hover: hover) and (pointer: fine) {
-  .mcard:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 9px 0 var(--edge-c), 0 32px 38px -20px color-mix(in srgb, var(--edge-c) 70%, transparent); }
-  .mcard:hover .mcard-svg { transform: scale(1.06) rotate(-1.5deg); }
+  .mcard:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 9px 0 var(--edge-c), 0 30px 36px -20px color-mix(in srgb, var(--edge-c) 65%, transparent); }
+  .mcard:hover .mcard-img { scale: 1.04; }
   .mcard:hover .mcard-more { background: #fff; color: var(--ink); }
 }
 .mcard:active { transform: translateY(2px) scale(.99); box-shadow: 0 2px 0 var(--edge-c); }
-/* асимметричное мягкое «облако» под блюдом */
-.mcard-blob {
-  position: absolute;
-  z-index: -1;
-  top: .75rem;
-  left: 50%;
-  width: 86%;
-  aspect-ratio: 1.5;
-  translate: -50% 0;
-  border-radius: 58% 42% 52% 48% / 46% 54% 46% 54%;
-  background: radial-gradient(circle at 40% 35%, #fff 0 30%, var(--glow) 60%, color-mix(in srgb, var(--glow) 40%, transparent) 100%);
-  box-shadow: inset 0 -10px 18px rgb(255 255 255 / .6);
-  opacity: .85;
-  animation: blob-morph 9s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-.mcard-lunch .mcard-blob { border-radius: 44% 56% 46% 54% / 56% 44% 56% 44%; animation-delay: -3s; }
-.mcard-snack .mcard-blob { border-radius: 52% 48% 60% 40% / 48% 58% 42% 52%; animation-delay: -6s; }
-@keyframes blob-morph {
-  to { border-radius: 46% 54% 42% 58% / 56% 44% 58% 42%; rotate: 6deg; }
-}
-.mcard-deco { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.md { position: absolute; display: block; height: auto; animation: deco-float 4.5s ease-in-out infinite; }
-.md-a { top: .75rem; right: .875rem; width: clamp(1.75rem, 2.6vw, 2.5rem); }
-.md-b { top: 38%; left: .75rem; width: .875rem; animation-delay: -1.5s; }
-.md-c { bottom: 32%; right: .75rem; width: 1.25rem; animation-delay: -3s; }
-.mcard-breakfast .md-a { animation: spin 24s linear infinite; }
-@keyframes deco-float { 50% { translate: 0 -5px; rotate: 8deg; } }
-.mcard-order {
-  position: absolute;
-  top: .625rem;
-  left: .75rem;
-  display: grid;
-  place-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50% 50% 50% 18%;
-  background: #fff;
-  color: var(--ink);
-  font-weight: 900;
-  font-size: .875rem;
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--edge-c) 45%, transparent);
-}
-.mcard-art { display: block; width: 100%; max-width: calc(var(--mc-art-h, 10rem) * 1.79); }
-.mcard-svg {
+/* картинка целиком в своих пропорциях: ширина 100%, высота авто — без обрезки */
+.mcard-art {
   display: block;
   width: 100%;
-  height: auto;
-  transition: transform 320ms var(--ease-settle);
-  filter: drop-shadow(0 8px 10px rgb(80 40 10 / .16));
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: calc(var(--r-art, 1.125rem));
+  background: #fff;
+  box-shadow: 0 2px 0 rgb(255 255 255 / .8) inset;
 }
-.meal-steam path { animation: steam 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom; }
-.meal-steam path:nth-child(2) { animation-delay: -.9s; }
-.meal-steam path:nth-child(3) { animation-delay: -1.8s; }
-@keyframes steam { 0%, 100% { opacity: .35; translate: 0 3px; } 50% { opacity: .95; translate: 0 -3px; } }
-.mcard-text { display: flex; flex-direction: column; align-items: center; gap: .375rem; margin-top: .25rem; }
+.mcard-img { display: block; width: 100%; height: auto; transition: scale 400ms var(--ease-settle); }
+.mcard-text { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .5rem; padding-inline: .25rem; min-width: 0; }
 .mcard-name {
-  padding: .3125rem 1.125rem .375rem;
+  padding: .25rem .875rem .3125rem;
   border-radius: 1rem 1rem 1rem .375rem;
   background: #fff;
   font-weight: 900;
-  font-size: clamp(1.0625rem, .85rem + .6vw, 1.3125rem);
+  font-size: clamp(1rem, .85rem + .45vw, 1.1875rem);
   line-height: 1.2;
   color: var(--ink);
-  box-shadow: 0 3px 0 color-mix(in srgb, var(--edge-c) 55%, transparent);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--edge-c) 50%, transparent);
   white-space: nowrap;
 }
-.mcard-lunch .mcard-name { border-radius: 1rem 1rem .375rem 1rem; }
-.mcard-snack .mcard-name { border-radius: .375rem 1rem 1rem 1rem; }
 .mcard-more {
   display: inline-flex;
   align-items: center;
-  gap: .375rem;
-  padding: .125rem .625rem;
+  gap: .3125rem;
+  padding: .1875rem .625rem;
   border-radius: 999px;
-  background: rgb(255 255 255 / .55);
+  background: rgb(255 255 255 / .6);
   font-weight: 800;
   font-size: .8125rem;
   color: #3b4d43;
+  white-space: nowrap;
   transition: background 200ms ease, color 200ms ease;
 }
 
@@ -1680,7 +1633,7 @@
     padding-top: var(--ms-pad);
     padding-bottom: var(--ms-pad);
     /* доступная высота для картинки: экран − шапка − отступы − строка заголовка − подписи карточки */
-    --mc-art-h: clamp(6.5rem, calc(100dvh - var(--header-h) - 2 * var(--ms-pad) - 5.25rem - 1.5rem - 7.5rem), 13rem);
+    --mc-art-h: clamp(6.5rem, calc(100dvh - var(--header-h) - 2 * var(--ms-pad) - 5.25rem - 1.5rem - 4.5rem), 14rem);
   }
   .meals-layout {
     grid-template-columns: minmax(0, 1fr) minmax(0, auto);
@@ -1692,31 +1645,28 @@
   .meals-layout > .section-heading { grid-area: head; }
   .mcards-desktop { display: contents; }
   .mcards-desktop .mcards { grid-area: cards; }
+  /* ширина картинки ограничена доступной высотой (пропорции ≈ 1.8 : 1) */
+  .mcards-desktop .mcard-art { max-width: calc(var(--mc-art-h) * 1.84); }
   .mcards-desktop .menu-card { grid-area: menu; width: auto; max-width: 30rem; justify-self: end; }
   .meals-band .section-title { font-size: clamp(1.625rem, 1rem + 1.5vw, 2.375rem); }
 }
 @media (min-width: 40em) and (max-width: 63.999em) {
   .meals-layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "menu" "cards"; }
   .mcards-desktop .menu-card { justify-self: stretch; max-width: none; }
-  .mcards-desktop .mcard { padding-inline: .5rem; }
+  .mcards-desktop .mcard-text { flex-direction: column; gap: .3125rem; }
   .mcards-desktop .mcard-name { font-size: 1rem; padding-inline: .75rem; }
   .menu-card-sheet { width: 3.75rem; }
 }
 
-/* ── Телефон: компактные карточки-строки, обычная прокрутка ── */
+/* ── Телефон: картинка на всю ширину карточки, обычная прокрутка ── */
 @media (max-width: 39.999em) {
   .meals-layout { gap: .875rem; }
   .mcards-mobile { gap: .875rem; }
   .mcards-mobile .mcards { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
-  .mcards-mobile .mcard { flex-direction: row; gap: .625rem; padding: .375rem .875rem .375rem .375rem; text-align: left; }
-  .mcards-mobile .mcard-art { flex: 0 0 9.5rem; width: 9.5rem; max-width: none; }
-  .mcards-mobile .mcard-blob { top: 50%; left: .25rem; width: 9.75rem; translate: 0 -50%; }
-  .mcards-mobile .mcard-text { align-items: flex-start; margin-top: 0; min-width: 0; }
-  .mcards-mobile .mcard-name { font-size: 1.125rem; padding: .25rem .875rem .3125rem; }
-  .mcards-mobile .mcard-order { top: auto; bottom: .5rem; left: auto; right: .625rem; width: 1.5rem; height: 1.5rem; font-size: .75rem; }
-  .mcards-mobile .md-a { top: .5rem; right: .625rem; width: 1.625rem; }
-  .mcards-mobile .md-b { top: .5rem; left: 9.75rem; }
-  .mcards-mobile .md-c { display: none; }
+  .mcards-mobile .mcard { padding: .3125rem .3125rem .5rem; border-width: 2px; box-shadow: 0 4px 0 var(--edge-c), 0 16px 22px -18px color-mix(in srgb, var(--edge-c) 60%, transparent); }
+  .mcards-mobile .mcard-art { --r-art: 1rem; }
+  .mcards-mobile .mcard-text { margin-top: .4375rem; }
+  .mcards-mobile .mcard-name { font-size: 1.0625rem; }
   .mcards-mobile .menu-card { gap: .625rem; padding: .5rem .625rem .5rem .5rem; }
   .menu-card-title { font-size: 1.0625rem; }
   .menu-card-hint { font-size: .8125rem; }
@@ -1724,14 +1674,12 @@
   .menu-card-arrow { display: none; }
 }
 @media (max-width: 22.499em) {
-  .mcards-mobile .mcard-art { flex-basis: 6.75rem; width: 6.75rem; }
-  .mcards-mobile .mcard-blob { width: 7rem; }
-  .mcards-mobile .md-b { left: 7rem; }
-  .mcards-mobile .mcard-name { font-size: 1rem; }
+  .mcards-mobile .mcard-name { font-size: 1rem; padding-inline: .625rem; }
+  .mcards-mobile .mcard-more { padding-inline: .5rem; }
   .menu-card-sheet { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mcard-blob, .md, .meal-steam path { animation: none !important; }
+  .mcard-img { transition: none; }
 }
 
 /* ───────────────────────── Модальные окна ───────────────────────── */
@@ -1812,9 +1760,8 @@
 }
 .placeholder-text { font-weight: 900; font-size: 1.125rem; line-height: 1.3; color: #263b31; }
 .placeholder-hint { font-size: .9375rem; color: #4a5d52; }
-.mmodal-art { position: relative; isolation: isolate; overflow: hidden; display: grid; place-items: center; padding: .75rem; border: 3px solid #fff; border-radius: var(--shape); background: var(--bg); box-shadow: 0 4px 0 var(--edge-c); }
-.mmodal-art .mcard-blob { top: 50%; translate: -50% -50%; width: min(80%, 18rem); }
-.mmodal-art .mcard-svg { max-width: 22rem; }
+.mmodal-art { padding: .375rem; border: 3px solid #fff; border-radius: var(--shape); background: var(--bg); box-shadow: 0 4px 0 var(--edge-c); }
+.mmodal-art .mcard-img { border-radius: 1rem; }
 .mphotos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
 .mphotos > li { min-width: 0; }
 .mphoto { display: block; overflow: hidden; border-radius: 1rem; aspect-ratio: 4 / 3; }

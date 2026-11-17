@@ -1,12 +1,24 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { site, type Meal, type WeeklyMenu } from '@/lib/site-data';
 import { Icon } from './Icons';
-import { MealArt } from './MealArt';
 import { Modal, Placeholder } from './Modal';
 
 const mealTone = { breakfast: 'sun', lunch: 'apricot', snack: 'berry' } as const;
+
+/** Иллюстрации приёмов пищи (это рисунки, не фотографии блюд садика) */
+const mealImage: Record<Meal['id'], { src: string; width: number; height: number }> = {
+  breakfast: { src: '/tangy-as.png', width: 826, height: 458 },
+  lunch: { src: '/tuski-as.png', width: 824, height: 458 },
+  snack: { src: '/besin-as.png', width: 843, height: 459 },
+};
+
+function MealPicture({ meal, sizes }: { meal: Meal; sizes: string }) {
+  const img = mealImage[meal.id];
+  return <Image src={img.src} width={img.width} height={img.height} sizes={sizes} alt={`${meal.name} — иллюстрация`} className="mcard-img" unoptimized />;
+}
 
 /**
  * Три яркие карточки питания + кнопка «Апталық ас мәзірі».
@@ -23,13 +35,8 @@ export function MealCards({ variant }: { variant: 'desktop' | 'mobile' }) {
         {site.meals.map((m, i) => (
           <li key={m.id} className="reveal" style={{ animationDelay: `${i * 80}ms` }}>
             <button type="button" className={`mcard mcard-${m.id}`} onClick={() => setOpenId(m.id)} aria-haspopup="dialog">
-              <span className="mcard-blob" aria-hidden="true" />
-              <MealDeco kind={m.id} />
-              <span className="mcard-order" aria-hidden="true">
-                {i + 1}
-              </span>
               <span className="mcard-art">
-                <MealArt kind={m.id} id={`m-${variant}-${m.id}`} className="mcard-svg" />
+                <MealPicture meal={m} sizes={variant === 'mobile' ? '100vw' : '(min-width: 64em) 25rem, 33vw'} />
               </span>
               <span className="mcard-text">
                 <span className="mcard-name">{m.name}</span>
@@ -64,7 +71,7 @@ export function MealCards({ variant }: { variant: 'desktop' | 'mobile' }) {
         eyebrow="Тамақтану"
         tone={meal ? mealTone[meal.id] : 'sun'}
       >
-        {meal && <MealPhotos meal={meal} variant={variant} />}
+        {meal && <MealPhotos meal={meal} />}
       </Modal>
 
       <Modal open={openId === 'menu'} onClose={() => setOpenId(null)} title="Апталық ас мәзірі" eyebrow="Тамақтану" tone="sky" wide={!!site.weeklyMenu}>
@@ -74,7 +81,7 @@ export function MealCards({ variant }: { variant: 'desktop' | 'mobile' }) {
   );
 }
 
-function MealPhotos({ meal, variant }: { meal: Meal; variant: string }) {
+function MealPhotos({ meal }: { meal: Meal }) {
   if (meal.photos.length) {
     return (
       <ul className="mphotos">
@@ -92,8 +99,7 @@ function MealPhotos({ meal, variant }: { meal: Meal; variant: string }) {
   return (
     <div className="grid gap-4">
       <div className={`mmodal-art mcard-${meal.id}`}>
-        <span className="mcard-blob" aria-hidden="true" />
-        <MealArt kind={meal.id} id={`mm-${variant}-${meal.id}`} className="mcard-svg" />
+        <MealPicture meal={meal} sizes="(min-width: 40em) 36rem, 100vw" />
       </div>
       <ul className="mphotos" aria-label="Фотосуреттер орны">
         {[1, 2, 3].map((n) => (
@@ -104,43 +110,6 @@ function MealPhotos({ meal, variant }: { meal: Meal; variant: string }) {
       </ul>
       <p className="modal-note">Мұнда балабақшада балаларға дайындалатын тағамдардың нақты суреттері орналастырылады.</p>
     </div>
-  );
-}
-
-/** Небольшие декоративные элементы вокруг блюда — у каждой карточки свои */
-function MealDeco({ kind }: { kind: Meal['id'] }) {
-  return (
-    <span className="mcard-deco" aria-hidden="true">
-      {kind === 'breakfast' && (
-        <>
-          <svg className="md md-a" viewBox="0 0 40 40">
-            <g fill="#ffd23f">
-              {Array.from({ length: 8 }, (_, i) => (
-                <rect key={i} x="18" y="1" width="4" height="8" rx="2" transform={`rotate(${i * 45} 20 20)`} />
-              ))}
-            </g>
-            <circle cx="20" cy="20" r="10" fill="#ffc21a" />
-            <circle cx="17" cy="17" r="3.5" fill="#fff3b0" />
-          </svg>
-          <svg className="md md-b" viewBox="0 0 20 20"><path d="M10 0c1.2 6 3.8 8.8 10 10-6.2 1.2-8.8 3.8-10 10C8.8 13.8 6.2 11.2 0 10 6.2 8.8 8.8 6.2 10 0Z" fill="#fff" /></svg>
-          <svg className="md md-c" viewBox="0 0 24 20"><circle cx="7" cy="12" r="6" fill="#e8344a" /><circle cx="17" cy="12" r="6" fill="#ff5468" /><path d="M7 6q3-6 5-6 2 0 5 6" stroke="#2f8f4b" strokeWidth="1.6" fill="none" /><circle cx="5" cy="10" r="1.6" fill="#fff" opacity=".7" /></svg>
-        </>
-      )}
-      {kind === 'lunch' && (
-        <>
-          <svg className="md md-a" viewBox="0 0 40 30"><path d="M3 27C3 12 16 2 37 3 37 20 24 29 3 27Z" fill="#2ecbb7" /><path d="M5 25Q18 16 33 6" stroke="#0e8f84" strokeWidth="1.8" fill="none" /></svg>
-          <svg className="md md-b" viewBox="0 0 20 20"><path d="M10 0c1.2 6 3.8 8.8 10 10-6.2 1.2-8.8 3.8-10 10C8.8 13.8 6.2 11.2 0 10 6.2 8.8 8.8 6.2 10 0Z" fill="#fff" /></svg>
-          <svg className="md md-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#ffd34d" /><circle cx="12" cy="12" r="8" fill="#fff3c4" /><g stroke="#ffd34d" strokeWidth="1.6">{[0, 60, 120].map((r) => <path key={r} d="M12 4v16" transform={`rotate(${r} 12 12)`} />)}</g></svg>
-        </>
-      )}
-      {kind === 'snack' && (
-        <>
-          <svg className="md md-a" viewBox="0 0 32 32"><g fill="#ff8fb5">{Array.from({ length: 5 }, (_, i) => <ellipse key={i} cx="16" cy="8" rx="5.5" ry="7.5" transform={`rotate(${i * 72} 16 16)`} />)}</g><circle cx="16" cy="16" r="4.5" fill="#ffd34d" /></svg>
-          <svg className="md md-b" viewBox="0 0 24 22"><path d="M12 21C4 15 0 11 0 6.5A6 6 0 0 1 12 4a6 6 0 0 1 12 2.5C24 11 20 15 12 21Z" fill="#ff7aa6" /><circle cx="6" cy="6" r="1.8" fill="#fff" opacity=".7" /></svg>
-          <svg className="md md-c" viewBox="0 0 20 20"><path d="M10 0c1.2 6 3.8 8.8 10 10-6.2 1.2-8.8 3.8-10 10C8.8 13.8 6.2 11.2 0 10 6.2 8.8 8.8 6.2 10 0Z" fill="#fff" /></svg>
-        </>
-      )}
-    </span>
   );
 }
 
