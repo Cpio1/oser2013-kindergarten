@@ -746,13 +746,13 @@
 .hero-scene-decor > .hero-trail { top: calc(100% - 1.25rem); left: 4%; width: 92%; height: auto; }
 /* мальчик и девочка по сторонам фото: стоят у нижних углов арки, не заходя на детей в кадре */
 .hero-scene-decor > .hero-kid {
-  bottom: -9%;
+  bottom: -8%;
   width: 34%;
   height: auto;
   filter: drop-shadow(0 6px 8px rgb(38 59 49 / .18));
 }
-.hero-scene-decor > .hero-kid-boy { left: -27%; }
-.hero-scene-decor > .hero-kid-girl { right: -27%; }
+.hero-scene-decor > .hero-kid-boy { left: -31%; }
+.hero-scene-decor > .hero-kid-girl { right: -31%; }
 
 .hero-scene-solo { width: min(100%, 25rem); }
 .hero-solo-emblem { width: 100%; height: auto; max-height: min(28rem, calc(100svh - var(--header-h) - 5rem)); object-fit: contain; }
@@ -780,7 +780,7 @@
 .m-hero-visual {
   display: flex;
   justify-content: center;
-  padding: 1.5rem 3.5rem 1.25rem;
+  padding: 1.5rem 3.75rem 1.25rem;
 }
 .hero-scene-mobile {
   --arch-w: min(100%, calc(clamp(7.5rem, 100svh - var(--header-h) - 27rem, 11.5rem) * 8 / 7));
@@ -792,9 +792,9 @@
 .hero-scene-mobile .hero-badge { width: 44%; right: -24%; top: -20%; }
 .hero-scene-mobile .hero-trail { top: calc(100% - .375rem); }
 /* телефон: дети меньше и чуть ближе к фото, чтобы не выходить за экран */
-.hero-scene-mobile .hero-scene-decor > .hero-kid { width: 30%; bottom: -6%; }
-.hero-scene-mobile .hero-scene-decor > .hero-kid-boy { left: -24%; }
-.hero-scene-mobile .hero-scene-decor > .hero-kid-girl { right: -24%; }
+.hero-scene-mobile .hero-scene-decor > .hero-kid { width: 31%; bottom: -5%; }
+.hero-scene-mobile .hero-scene-decor > .hero-kid-boy { left: -28%; }
+.hero-scene-mobile .hero-scene-decor > .hero-kid-girl { right: -28%; }
 .m-hero-media { width: 100%; height: auto; max-height: 10.5rem; }
 .m-hero-facts {
   display: grid;
@@ -1368,21 +1368,12 @@
   position: relative;
   display: block;
   overflow: hidden;
+  aspect-ratio: 1672 / 941; /* исходные пропорции иллюстрации — без обрезки */
   border-radius: 1.25rem;
-  /* «рамка» из точек вокруг картинки */
-  outline: 3px dotted color-mix(in srgb, var(--frame) 55%, white);
-  outline-offset: -7px;
+  background: #fffdf8;
 }
-.gcard-svg { display: block; width: 100%; height: 100%; }
+.gcard-img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .gcard-text { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
-.gcard-name {
-  font-weight: 900;
-  font-size: 1.5rem;
-  line-height: 1.15;
-  color: var(--name);
-  overflow-wrap: normal;
-}
-.gcard-name-sub { font-weight: 800; font-size: .8em; color: #263b31; }
 .gcard-label { font-weight: 700; font-size: 1rem; line-height: 1.35; color: #4a5d52; }
 .gcard-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .5rem; }
 .gcard-age {
@@ -1409,24 +1400,25 @@
   font-size: .9375rem;
   box-shadow: 0 3px 0 rgb(0 0 0 / .12);
 }
-.gcards-desktop .gcard { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 1.25rem; padding-right: 1.25rem; }
-.gcards-desktop .gcard-art { aspect-ratio: 8 / 5; }
-@media (max-width: 63.999em) {
-  .gcards-desktop .gcard { grid-template-columns: minmax(0, 1fr); padding: .5rem .5rem 1rem; gap: .875rem; }
-  .gcards-desktop .gcard-text { padding-inline: .5rem; }
-}
-/* телефон: картинка слева, текст справа */
-.gcards-mobile .gcard { grid-template-columns: 7.5rem minmax(0, 1fr); align-items: center; gap: .75rem; padding: .375rem .75rem .375rem .375rem; border-radius: 1.375rem; }
-.gcards-mobile .gcard-art { aspect-ratio: 1; border-radius: 1rem; outline-offset: -5px; outline-width: 2px; }
-.gcards-mobile .gcard-name { font-size: 1.1875rem; }
+.gcard-text { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .375rem .75rem; }
+.gcard-text .gcard-meta { margin-top: 0; }
+/* компьютер: сетка 2×2, иллюстрация сверху на всю ширину карточки, подпись снизу */
+.gcards-desktop .gcard { grid-template-rows: auto 1fr; align-content: start; gap: .875rem; padding: .5rem .5rem 1rem; }
+.gcards-desktop .gcard-text { padding-inline: .625rem; }
+/* телефон: одна колонка, картинка по ширине экрана */
+.gcards-mobile { gap: 1.125rem; }
+.gcards-mobile .gcard { gap: .625rem; padding: .3125rem .3125rem .75rem; border-width: 2px; border-radius: 1.25rem; box-shadow: 0 4px 0 var(--frame), 0 16px 24px -20px rgb(38 59 49 / .6); }
+.gcards-mobile .gcard-art { border-radius: .9375rem; }
+.gcards-mobile .gcard-text { padding-inline: .375rem; gap: .375rem .5rem; }
 .gcards-mobile .gcard-label { font-size: .875rem; }
-.gcards-mobile .gcard-meta { margin-top: .25rem; gap: .375rem; }
-.gcards-mobile .gcard-age, .gcards-mobile .gcard-more { min-height: 1.75rem; padding: .125rem .625rem; font-size: .8125rem; }
+.gcards-mobile .gcard-meta { gap: .375rem; }
+.gcards-mobile .gcard-age, .gcards-mobile .gcard-more { min-height: 1.875rem; padding: .125rem .625rem; font-size: .8125rem; }
 @media (max-width: 22.499em) {
-  .gcards-mobile .gcard { grid-template-columns: 5.75rem minmax(0, 1fr); }
+  .gcards-mobile .gcard-text { flex-direction: column; align-items: flex-start; }
 }
-.gmodal-banner { position: relative; overflow: hidden; aspect-ratio: 16 / 7; border-radius: 1.25rem; border: 3px solid var(--frame); }
-.gmodal-age { position: absolute; left: .75rem; bottom: .75rem; box-shadow: 0 3px 0 rgb(0 0 0 / .1); }
+.gmodal-banner { position: relative; overflow: hidden; aspect-ratio: 1672 / 941; border-radius: 1.25rem; border: 3px solid var(--frame); background: #fffdf8; }
+.gmodal-head { display: grid; justify-items: start; gap: .625rem; }
+.gmodal-head .gmodal-banner { width: 100%; }
 .gmodal-video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 1.25rem; background: #1e2a24; }
 
 /* ───────────────────────── Тамақтану: яркие карточки ───────────────────────── */

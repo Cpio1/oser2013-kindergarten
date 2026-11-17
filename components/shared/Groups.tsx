@@ -1,12 +1,36 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { site, type Group } from '@/lib/site-data';
-import { GroupArt } from './GroupArt';
 import { Icon } from './Icons';
 import { Modal, Placeholder } from './Modal';
 
 const modalTone = { apricot: 'apricot', sun: 'sun', leaf: 'leaf', sky: 'sky' } as const;
+
+/** Иллюстрации групп (1672×941). Название группы уже нарисовано на картинке. */
+const groupImage: Record<string, string> = {
+  kulynshak: '/qulynshaq.png',
+  baldauren: '/baldauren.png',
+  balbobek: '/balbobek.png',
+  bobek: '/bobek.png',
+};
+const IMG_W = 1672;
+const IMG_H = 941;
+
+function GroupPicture({ group, sizes }: { group: Group; sizes: string }) {
+  return (
+    <Image
+      src={groupImage[group.id]}
+      width={IMG_W}
+      height={IMG_H}
+      sizes={sizes}
+      alt={`«${group.name}» тобы — ${group.label}`}
+      className="gcard-img"
+      unoptimized
+    />
+  );
+}
 
 /**
  * Карточки групп: компьютер — сетка 2×2 (картинка слева, текст справа),
@@ -23,12 +47,11 @@ export function GroupCards({ variant }: { variant: 'desktop' | 'mobile' }) {
           <li key={group.id} className="reveal" style={{ animationDelay: `${i * 60}ms` }}>
             <button type="button" className={`gcard gcard-${group.motif}`} onClick={() => setOpenId(group.id)} aria-haspopup="dialog">
               <span className="gcard-art">
-                <GroupArt kind={group.motif} id={`g-${variant}-${group.id}`} className="gcard-svg" />
+                <GroupPicture group={group} sizes={variant === 'mobile' ? '100vw' : '(min-width: 64em) 36rem, 100vw'} />
               </span>
               <span className="gcard-text">
-                <span className="gcard-name">
-                  «{group.name}» <span className="gcard-name-sub">тобы</span>
-                </span>
+                {/* название уже нарисовано на картинке — оставляем только для экранных чтецов */}
+                <span className="sr-only">«{group.name}» тобы</span>
                 <span className="gcard-label">{group.label}</span>
                 <span className="gcard-meta">
                   <span className="gcard-age">{group.age}</span>
@@ -60,8 +83,10 @@ function GroupDetails({ group, variant }: { group: Group; variant: string }) {
   const video = group.video;
   return (
     <div className="grid gap-4">
-      <div className={`gmodal-banner gcard-${group.motif}`}>
-        <GroupArt kind={group.motif} id={`gm-${variant}-${group.id}`} className="gcard-svg" />
+      <div className={`gmodal-head gcard-${group.motif}`}>
+        <div className="gmodal-banner">
+          <GroupPicture group={group} sizes="(min-width: 40em) 36rem, 100vw" />
+        </div>
         <span className="gcard-age gmodal-age">{group.age}</span>
       </div>
       <section aria-label="Топ туралы бейне">

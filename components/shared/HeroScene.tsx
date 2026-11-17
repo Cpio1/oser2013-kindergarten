@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import { site } from '@/lib/site-data';
 import { HeroArtTall, HeroArtWide } from './HeroArt';
-import { KidBoy, KidGirl } from './KazakhKids';
 import { SoftStar } from './Motifs';
 import { HeroTrail, Rainbow } from './Scenery';
 
@@ -53,8 +53,9 @@ export function HeroScene({ variant }: { variant: 'desktop' | 'mobile' }) {
       <span className="hero-scene-decor" aria-hidden="true">
         <HeroTrail className="hero-trail" />
         <SoftStar className="decor decor-xs hero-star" color="#F3A780" />
-        <KidBoy id={`kid-boy-${variant}`} className="hero-kid hero-kid-boy" />
-        <KidGirl id={`kid-girl-${variant}`} className="hero-kid hero-kid-girl" />
+        {/* маскоты: прозрачный PNG 1086×1448, без оптимизации (static export) — исходное качество */}
+        <Image src="/mascot-boy.png" width={1086} height={1448} alt="" sizes={mobile ? '6rem' : '10rem'} priority unoptimized className="hero-kid hero-kid-boy" />
+        <Image src="/mascot-girl.png" width={1086} height={1448} alt="" sizes={mobile ? '6rem' : '10rem'} priority unoptimized className="hero-kid hero-kid-girl" />
       </span>
     </div>
   );
