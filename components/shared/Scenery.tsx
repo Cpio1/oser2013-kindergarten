@@ -309,6 +309,7 @@ export function Scenery({ kind }: { kind: SceneryKind }) {
             <Berries className="sc sc-wide sc-meals" />
             <Berries className="sc sc-narrow sc-meals-m" />
             <Stars className="sc sc-wide sky-meals-stars" />
+            <SkyCloud className="sc sc-wide sky-meals-cloud" />
           </>
         )}
         {kind === 'gallery' && (

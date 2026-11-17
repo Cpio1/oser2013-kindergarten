@@ -73,13 +73,13 @@ export function GroupCards({ variant }: { variant: 'desktop' | 'mobile' }) {
         eyebrow={current?.label}
         tone={current ? modalTone[current.tone] : 'sun'}
       >
-        {current && <GroupDetails group={current} variant={variant} />}
+        {current && <GroupDetails group={current} />}
       </Modal>
     </>
   );
 }
 
-function GroupDetails({ group, variant }: { group: Group; variant: string }) {
+function GroupDetails({ group }: { group: Group }) {
   const video = group.video;
   return (
     <div className="grid gap-4">

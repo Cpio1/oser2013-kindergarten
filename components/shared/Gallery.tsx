@@ -46,7 +46,7 @@ export default function Gallery() {
   const current = index !== null ? photos[index] : null;
 
   return (
-    <Section id="gallery" className="section-pad">
+    <Section id="gallery" className="section-pad gallery-section">
       <Scenery kind="gallery" />
       <div className="container-x">
         <SectionHeading id="gallery" eyebrow="Балабақша сәттері" title="Галерея" decor={<SoftStar className="decor decor-xs" />} />
@@ -69,7 +69,7 @@ export default function Gallery() {
           ))}
         </ul>
         {count > VISIBLE.mobile && (
-          <div className={`mt-5 ${count > VISIBLE.desktop ? '' : 'sm:hidden'}`}>
+          <div className={`gallery-more ${count > VISIBLE.desktop ? '' : 'sm:hidden'}`}>
             <button type="button" className="btn btn-secondary" onClick={() => open(0)}>
               <Icon name="images" className="size-5" />
               <span>Барлық фотолар ({count})</span>
