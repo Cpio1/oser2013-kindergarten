@@ -886,7 +886,7 @@
 .about-flower { bottom: -.25rem; left: 0; }
 .about-star { top: 1.25rem; left: -.25rem; }
 
-/* Балабақшаның мақсаты — яркая рамка, крупный читаемый текст */
+/* Мақсатымыз — яркая рамка, крупный читаемый текст */
 .goal-card {
   position: relative;
   isolation: isolate;

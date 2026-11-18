@@ -95,7 +95,7 @@ export function documentHref(value: string): string | null {
 
 export const site = {
   name: 'Осер 2013',
-  tagline: 'Қазақ тілді балабақша',
+  tagline: 'Қазақ тілді бөбекжай-бақша',
   headline: 'Әр баланың алғашқы қадамына қамқорлық',
   intro: 'Қарақыстақ ауылындағы балалардың бірге ойнап, үйреніп, өсуіне арналған орта',
   slogan: 'Кішкентай қадамдар. Жылы қамқорлық.',
@@ -111,14 +111,14 @@ export const site = {
   language: 'Қазақ тілі',
 
   about: {
-    title: 'Қарақыстақ ауылындағы балабақша',
+    title: 'Қарақыстақ ауылындағы бөбекжай-бақша',
     paragraphs: [
-      '«Осер 2013» балабақшасы Алматы облысы, Жамбыл ауданындағы Қарақыстақ ауылында орналасқан. Балабақшада оқу мен тәрбие қазақ тілінде жүргізіледі.',
+      '«Осер 2013» бөбекжай-бақшасы Алматы облысы, Жамбыл ауданындағы Қарақыстақ ауылында орналасқан. Бөбекжай-бақшада оқу мен тәрбие қазақ тілінде жүргізіледі.',
       'Балалар жасына қарай төрт топқа бөлінеді. Күніне үш мезгіл тамақтану қарастырылған: таңғы ас, түскі ас және бесін ас.',
     ],
-    /** «Балабақшаның мақсаты» — текст без сокращений */
+    /** «Мақсатымыз» — текст без сокращений */
     goal: {
-      title: 'БАЛАБАҚШАНЫҢ МАҚСАТЫ',
+      title: 'Мақсатымыз',
       paragraphs: [
         'Әрбір баланың жеке қабілеті мен шығармашылық әлеуетін ашуға, жан-жақты дамыған, білімді, тәрбиелі, дені сау, ұлттық құндылықтарды бойына сіңірген тұлға болып қалыптасуына қолайлы орта қалыптастыру.',
         'Баланың қауіпсіздігі мен денсаулығын сақтай отырып, мейірімділікке, адамгершілікке, отансүйгіштікке тәрбиелеу және ата-анамен тығыз ынтымақтастық орнату.',
@@ -169,7 +169,7 @@ export const site = {
     phone: '',
     /** Международный номер WhatsApp: '+7 700 000 00 00' */
     whatsapp: '',
-    whatsappMessage: 'Сәлеметсіз бе! «Осер 2013» балабақшасы туралы білгім келеді.',
+    whatsappMessage: 'Сәлеметсіз бе! «Осер 2013» бөбекжай-бақшасы туралы білгім келеді.',
     email: '',
     /** Только подтверждённый профиль: 'https://www.instagram.com/...' */
     instagramProfile: '',
@@ -185,11 +185,11 @@ export const site = {
   domain: '',
 
   media: {
-    logo: { kind: 'image', src: '/images/optimized/logo.webp', width: 128, height: 128, alt: 'Осер 2013 балабақшасының эмблемасы' } as ImageMedia | null,
+    logo: { kind: 'image', src: '/images/optimized/logo.webp', width: 128, height: 128, alt: 'Осер 2013 бөбекжай-бақшасының эмблемасы' } as ImageMedia | null,
     /** main-page */
-    hero: { kind: 'image', src: '/images/optimized/main-page.png', width: 720, height: 720, alt: 'Осер 2013 бөбекжай бақшасының эмблемасы', fit: 'contain' } as ImageMedia | null,
+    hero: { kind: 'image', src: '/images/optimized/main-page.png', width: 720, height: 720, alt: 'Осер 2013 бөбекжай-бақшасының эмблемасы', fit: 'contain' } as ImageMedia | null,
     /** Фото в арке первого экрана рядом с эмблемой (кадр 8:7, дети в центре) */
-    heroPhoto: { kind: 'image', src: '/images/optimized/image21.webp', width: 1600, height: 1200, alt: 'Ұлттық киім киген балалар балабақша ауласында' } as ImageMedia | null,
+    heroPhoto: { kind: 'image', src: '/images/optimized/image21.webp', width: 1600, height: 1200, alt: 'Ұлттық киім киген балалар бөбекжай-бақша ауласында' } as ImageMedia | null,
     /** main-page2: изображение или видео для «Біз туралы» */
     about: { kind: 'image', src: '/images/optimized/image22.webp', width: 1600, height: 1200, alt: 'Ойын бөлмесінде шеңбер құрып отырған балалар мен тәрбиешілер' } as ImageMedia | VideoMedia | null,
   },
@@ -200,7 +200,7 @@ export const site = {
     { src: '/images/optimized/image3.webp', thumbnail: '/images/optimized/image3-thumb.webp', width: 1083, height: 1600, alt: 'Мерекелік безендірілген бөлмедегі балалар мен тәрбиешілер', position: '50% 50%' },
     { src: '/images/optimized/image4.webp', thumbnail: '/images/optimized/image4-thumb.webp', width: 1600, height: 1371, alt: 'Ауладағы ұлттық мерекеге жиналған балалар', position: '50% 50%' },
     { src: '/images/optimized/image5.webp', thumbnail: '/images/optimized/image5-thumb.webp', width: 1600, height: 1371, alt: 'Аулада ұлттық киіммен өнер көрсетіп тұрған балалар', position: '50% 50%' },
-    { src: '/images/optimized/image6.webp', thumbnail: '/images/optimized/image6-thumb.webp', width: 1600, height: 1371, alt: 'Балабақша ауласындағы мерекелік би', position: '50% 50%' },
+    { src: '/images/optimized/image6.webp', thumbnail: '/images/optimized/image6-thumb.webp', width: 1600, height: 1371, alt: 'Бөбекжай-бақша ауласындағы мерекелік би', position: '50% 50%' },
     { src: '/images/optimized/image7.webp', thumbnail: '/images/optimized/image7-thumb.webp', width: 1083, height: 1600, alt: 'Бөлмедегі мерекелік қойылымға қатысқан балалар', position: '50% 50%' },
     { src: '/images/optimized/image8.webp', thumbnail: '/images/optimized/image8-thumb.webp', width: 1083, height: 1600, alt: 'Сары киімдегі балалардың мерекелік қойылымы', position: '50% 50%' },
     { src: '/images/optimized/image9.webp', thumbnail: '/images/optimized/image9-thumb.webp', width: 1280, height: 780, alt: 'Ұлттық киімдегі балалар мен тәрбиешілердің топтық суреті', position: '50% 50%' },
@@ -215,7 +215,7 @@ export const site = {
     { src: '/images/optimized/image18.webp', thumbnail: '/images/optimized/image18-thumb.webp', width: 1600, height: 1066, alt: 'Мерекелік дастарқан басындағы балалар мен ересектер', position: '50% 50%' },
     { src: '/images/optimized/image19.webp', thumbnail: '/images/optimized/image19-thumb.webp', width: 1280, height: 960, alt: 'Сынып бөлмесіндегі мерекелік киім киген балалар', position: '50% 50%' },
     { src: '/images/optimized/image20.webp', thumbnail: '/images/optimized/image20-thumb.webp', width: 1200, height: 1600, alt: 'Тақта алдында бірге тұрған балалар', position: '50% 50%' },
-    { src: '/images/optimized/image21.webp', thumbnail: '/images/optimized/image21-thumb.webp', width: 1600, height: 1200, alt: 'Балабақша ауласындағы балалар', position: '50% 50%' },
+    { src: '/images/optimized/image21.webp', thumbnail: '/images/optimized/image21-thumb.webp', width: 1600, height: 1200, alt: 'Бөбекжай-бақша ауласындағы балалар', position: '50% 50%' },
     { src: '/images/optimized/image22.webp', thumbnail: '/images/optimized/image22-thumb.webp', width: 1600, height: 1200, alt: 'Ойын бөлмесінде шеңбер құрып отырған балалар', position: '50% 50%' },
     { src: '/images/optimized/image23.webp', thumbnail: '/images/optimized/image23-thumb.webp', width: 1600, height: 1200, alt: 'Көк және ақ киімдегі балалардың биі', position: '50% 50%' },
     { src: '/images/optimized/image24.webp', thumbnail: '/images/optimized/image24-thumb.webp', width: 1600, height: 721, alt: 'Залдағы балалар мен тәрбиешілердің топтық суреті', position: '50% 50%' },

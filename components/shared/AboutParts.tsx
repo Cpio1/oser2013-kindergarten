@@ -68,7 +68,7 @@ function AboutMediaElement() {
   );
 }
 
-/** «Балабақшаның мақсаты» — отдельная карточка в разделе «Біз туралы» */
+/** «Мақсатымыз» — отдельная карточка в разделе «Біз туралы» */
 export function AboutGoal() {
   const { title, paragraphs } = site.about.goal;
   return (

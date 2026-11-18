@@ -49,7 +49,7 @@ export default function Gallery() {
     <Section id="gallery" className="section-pad gallery-section">
       <Scenery kind="gallery" />
       <div className="container-x">
-        <SectionHeading id="gallery" eyebrow="Балабақша сәттері" title="Галерея" decor={<SoftStar className="decor decor-xs" />} />
+        <SectionHeading id="gallery" eyebrow="Бөбекжай-бақша сәттері" title="Галерея" decor={<SoftStar className="decor decor-xs" />} />
         <ul className="gallery-grid">
           {photos.map((photo, i) => (
             <li key={photo.src} className="gallery-item">

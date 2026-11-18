@@ -94,7 +94,7 @@ export default function Home() {
               id="groups"
               eyebrow="Топтар"
               title="Әр жасқа — өз тобы"
-              lead="Балабақшада жасына қарай төрт топ бар."
+              lead="Бөбекжай-бақшада жасына қарай төрт топ бар."
               decor={<SoftStar className="decor decor-xs" />}
             />
             <DesktopOnly>

@@ -3,9 +3,9 @@ import './fonts.css';
 import './globals.css';
 import { site } from '@/lib/site-data';
 
-const title = `${site.name} — Қарақыстақ ауылындағы балабақша`;
+const title = `${site.name} — Қарақыстақ ауылындағы бөбекжай-бақша`;
 const description =
-  'Қарақыстақ ауылындағы «Осер 2013» қазақ тілді балабақшасы: төрт жас тобы, күніне үш мезгіл тамақтану. Мекенжайы: Жамбыл ауданы, Бердіғұлов көшесі, 19А.';
+  'Қарақыстақ ауылындағы «Осер 2013» қазақ тілді бөбекжай-бақшасы: төрт жас тобы, күніне үш мезгіл тамақтану. Мекенжайы: Жамбыл ауданы, Бердіғұлов көшесі, 19А.';
 // Relative social images need the confirmed production domain.
 const ogImage = site.domain ? site.media.hero?.src : undefined;
 

@@ -41,7 +41,7 @@ export function contactActions(): ContactAction[] {
   if (tel) actions.push({ key: 'phone', label: phone, hint: 'Қоңырау шалу', href: tel, icon: 'phone', external: false, primary: true });
   if (wa) actions.push({ key: 'whatsapp', label: 'WhatsApp-қа жазу', href: wa, icon: 'chat', external: true, primary: !tel });
   actions.push({ key: 'map', label: 'Картадан іздеу', hint: 'Мекенжай бойынша іздеу', href: mapHref(), icon: 'map', external: true, primary: !tel && !wa });
-  actions.push({ key: 'reel', label: 'Instagram-да көру', hint: 'Балабақша туралы бейне', href: site.links.reel, icon: 'video', external: true });
+  actions.push({ key: 'reel', label: 'Instagram-да көру', hint: 'Бөбекжай-бақша туралы бейне', href: site.links.reel, icon: 'video', external: true });
   if (instagramProfile) actions.push({ key: 'instagram', label: 'Instagram парақшасы', href: instagramProfile, icon: 'camera', external: true });
   if (email) actions.push({ key: 'email', label: email, hint: 'Электрондық пошта', href: `mailto:${email}`, icon: 'mail', external: false });
   return actions;

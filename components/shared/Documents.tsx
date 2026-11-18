@@ -21,7 +21,7 @@ export function Documents() {
                 <p className="eyebrow text-leaf">Ата-аналарға</p>
                 <h2 id="documents-title" className="section-title">Құжаттар</h2>
                 <p className="mt-2 text-muted">
-                  {folder || files.length ? 'Балабақша құжаттарымен танысыңыз' : 'Құжаттар жақында қосылады'}
+                  {folder || files.length ? 'Бөбекжай-бақша құжаттарымен танысыңыз' : 'Құжаттар жақында қосылады'}
                 </p>
               </div>
             </div>
